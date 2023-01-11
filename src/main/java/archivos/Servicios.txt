@@ -1,0 +1,7 @@
+Nombre,Precio
+Cambio de Aceite,20.00
+Cambio de Filtro,30.00
+Ajuste del clutch,15.00
+Cambio del refrigerante,10.99
+Revisión de las luces y los faros,10.00
+Cambio del refrigerante,19.50

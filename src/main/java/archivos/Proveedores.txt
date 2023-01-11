@@ -1,0 +1,3 @@
+Cédula,Nombre,Dirección,Teléfono
+0703364987,David Herrera,Urdesa,0998724158
+0701285239,Kevin Cruz,Alborada,0994353621

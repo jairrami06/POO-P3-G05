@@ -1,0 +1,5 @@
+Cédula,Nombre,Dirección,Teléfono,Tipo
+0702942598,Alex Romero,Ceibos,0992489213,Personal
+0701982339,TADEC,Urdesa,0996481345,Empresarial
+0709874212,Mario López,Florida,0985367923,Personal
+0708521456,ENESA,Bellavista,0982345789,Empresarial

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.proyectofinal.SecondaryController">
+   <children>
+      <Button fx:id="btnCerrarSesion" layoutX="465.0" layoutY="347.0" onAction="#switchToPrimary" text="Cerrar Sesión" />
+      <Label fx:id="lblPrincipal" layoutX="69.0" layoutY="32.0" text="text">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Label>
+      <Button fx:id="btn1" layoutX="57.0" layoutY="116.0" mnemonicParsing="false" onAction="#boton1" text="Administrar Cliente" visible="false" />
+      <Button fx:id="btn3" layoutX="57.0" layoutY="242.0" mnemonicParsing="false" onAction="#boton3" text="Administrar Servicio" visible="false" />
+      <Button fx:id="btn2" layoutX="55.0" layoutY="181.0" mnemonicParsing="false" onAction="#boton2" prefHeight="25.0" prefWidth="130.0" text="Administrar Proveedor" visible="false" />
+      <Button fx:id="btn4" layoutX="56.0" layoutY="116.0" mnemonicParsing="false" onAction="#boton4" text="Generar factura a empresas" visible="false" />
+      <Button fx:id="btn7" layoutX="57.0" layoutY="116.0" mnemonicParsing="false" onAction="#boton7" text="Consultar orden de servicio" visible="false" />
+      <Button fx:id="btn5" layoutX="54.0" layoutY="180.0" mnemonicParsing="false" onAction="#boton5" text="Reporte de ingresos por servicio" visible="false" />
+      <Button fx:id="btn8" layoutX="54.0" layoutY="180.0" mnemonicParsing="false" onAction="#boton8" text="Generar orden de servicio" visible="false" />
+      <Button fx:id="btn6" layoutX="58.0" layoutY="242.0" mnemonicParsing="false" onAction="#boton6" prefHeight="25.0" prefWidth="197.0" text="Reporte de atenciones por técnico" visible="false" />
+      <Button fx:id="btn9" layoutX="60.0" layoutY="242.0" mnemonicParsing="false" onAction="#boton9" text="Reportar falta de insumos" visible="false" />
+   </children>
+</AnchorPane>
