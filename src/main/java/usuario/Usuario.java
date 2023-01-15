@@ -1,6 +1,13 @@
 
 package usuario;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
+import modelo.Cliente;
+
 
 public abstract class Usuario {
     //atributos de la clase Usuario para el almacenamiento de los datos que permiten el ingreso al sistema
@@ -8,6 +15,8 @@ public abstract class Usuario {
     protected String contrasena;
     protected String nombre;
     Scanner sc = new Scanner(System.in);
+    protected static ArrayList<Usuario> usuarios;
+    
     //constructor de la clase que inicializa los atributos
     public Usuario(String n_usuario, String contrasena, String nombre){
         this.n_usuario = n_usuario;
@@ -15,7 +24,7 @@ public abstract class Usuario {
         this.nombre = nombre;
     }
     //este metodo permite siempre la accesibilidad a un menu principal
-    public abstract void ingresarMenu();
+    
     
     //getters y setters
     public String getN_usuario(){
@@ -40,4 +49,41 @@ public abstract class Usuario {
         }
         return false;
     }
+    
+    public static ArrayList<Usuario> cargarUsuarios(){
+        usuarios = new ArrayList<>();
+        try(BufferedReader br = new BufferedReader(new FileReader("data/Usuarios.txt"))){
+                br.readLine();
+                String linea;
+                while((linea = br.readLine()) != null){
+                    String[] sep = linea.split(",");
+                    if(sep[3].equals("admin")){
+                        Usuario us = new Admin(sep[0],sep[1],sep[2]);
+                        usuarios.add(us);
+                    }else if(sep[3].equals("tecnico")){
+                        Usuario us = new Tecnico(sep[0],sep[1],sep[2]);
+                        usuarios.add(us);
+                    }else if(sep[3].equals("cobranzas")){
+                        Usuario us = new Cobranza(sep[0],sep[1],sep[2]);
+                        usuarios.add(us);
+                    }
+                }
+            }catch(FileNotFoundException e1){
+                System.out.println(e1);
+            }catch(IOException e2){
+                System.out.println(e2);
+            }catch(Exception e3){
+                System.out.println(e3);
+            }
+        return usuarios; 
+    }
+     public static int iniciarSesion(String usuario, String contrasena){
+            //con la ayuda de un do-while validamos dentro de si mismo las credenciales
+                Usuario validacion = new Admin(usuario,contrasena,"");
+                if(usuarios.contains(validacion)){
+                    int ind = usuarios.indexOf(validacion);
+                    return ind;
+                }
+                return -1;
+    }   
 }

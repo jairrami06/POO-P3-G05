@@ -1,12 +1,10 @@
 package usuario;
 import Utilidad.Servicio;
 import Utilidad.Orden;
-import main.*;
+
 import modelo.*;
 import java.util.ArrayList;
-import static main.Sistema.ordenes;
-import static main.Sistema.servicios;
-import static main.Sistema.usuarios;
+
 
 public class Cobranza extends Usuario{
     public Cobranza(String n_usuario, String contrasena, String nombre){
@@ -14,34 +12,14 @@ public class Cobranza extends Usuario{
     }
     //aqui se realiza en el metodo ingresarMenu la impresion por pantalla del menu tecnico, y usa similar a las otras clases,
     //un switch para navegar entre las opciones, que permite volver al mismo menu
-    @Override
-    public void ingresarMenu(){
-        System.out.println("Menú Cobranzas");
-        System.out.println("1. Generar facturas a empresas");
-        System.out.println("2. Reporte de ingresos por servicios");
-        System.out.println("3. Reporte de atenciones por técnico");
-        System.out.println("4. Cerrar sesión");
-        int entrada = sc.nextInt();
-        sc.nextLine();
-        switch (entrada) {
-            case 1:
-                generarFactura(Sistema.clientes);
-                break;
-            case 2:
-                reportarIngresos();
-                break;
-            case 3:
-                reportarIngresosTecnico();
-                break;
-            default:
-                break;
-        }
-    }   
+       
     //en este primer metodo se generan las facturas de los clientes tipo empresarial. Recibe la lista de clientes para extraer
     //y validar el codigo de identificacion del objeto del cliente (que sea de tipo empresarial); ademas, solicita el mes y año
     //del cual se requiere factura y se filtran las ordenes vinculadas a los clientes que coincidan con la fecha, para finalmente
     // mostrar por pantalla los servicios contratados, el detalle de los mismos, el precio de cada uno,y el total final a pagar
-    public void generarFactura(ArrayList<Cliente> clientes){
+    
+    
+    /*public void generarFactura(ArrayList<Cliente> clientes){
         System.out.println("Ingrese RUC de la empresa");
         String codigoempresa = sc.nextLine();
         System.out.println("Ingrese el mes de facturación (MM): ");
@@ -84,11 +62,13 @@ public class Cobranza extends Usuario{
             System.out.println("El codigo no esta asociado a ningun cliente");
         }
         //finalmente al terminar la ejecucion del metodo se llama al metodo que nos devuelve al menu principal
-        ingresarMenu();
-    }
+      
+    }*/
+
     //en este metodo se reportan los ingresos de todos los servicios contratados en su cantidad total de veces
     //durante un mes y año en concreto
-    public void reportarIngresos(){
+    
+    /*public void reportarIngresos(){
         System.out.println("Ingrese el mes de facturación a consultar(MM): ");
         String mes = sc.nextLine();
         System.out.println("Ingrese el año de facturación a consultar(YYYY): ");
@@ -122,11 +102,12 @@ public class Cobranza extends Usuario{
             System.out.println(s.getNombre()+"              $"+v);
         }
         //aqui se permite regresar al menu principal una vez casi finalizada la ejecucion del metodo
-        ingresarMenu();
-    }
+        
+    }*/
     //en este metodo de forma similar al anterior, se imprime en pantalla un reporte de todo el saldo recaudado que
     //cada tecnico haya registrado en un mes y año especificos
-    public void reportarIngresosTecnico(){
+    
+    /*public void reportarIngresosTecnico(){
         System.out.println("Ingrese el mes de facturación a consultar(MM): ");
         String mes = sc.nextLine();
         System.out.println("Ingrese el año de facturación a consultar(YYYY): ");
@@ -162,8 +143,8 @@ public class Cobranza extends Usuario{
             }
         }
         //finalmente se llama al metodo para regresar al menu principal
-        ingresarMenu();
-    }
+       
+    }*/
     //en este metodo similar al tostring, se recibe un numero que el usuario haya ingresado para seleccionar el mes de filtro,
     //unicamente para hacer referencia en un formato de letras a qué mes corresponde dicho numero de mes y devuelve el string del nombre del mes
      public String toStringMeses(String numeroMes){

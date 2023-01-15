@@ -8,28 +8,26 @@ import Enums.TipoCliente;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.net.URL; 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
-import modelo.*;
+import modelo.Cliente;
 
+import modelo.Proveedor;
 
 /**
  * FXML Controller class
  *
- * @author jaira
+ * @author oweny
  */
-public class DatosController implements Initializable {
-
+public class Datos2Controller implements Initializable {
+    
     @FXML
     private Label lblTitulo;
     @FXML
@@ -40,12 +38,6 @@ public class DatosController implements Initializable {
     private TextField txtDireccion;
     @FXML
     private TextField txtTelefono;
-    @FXML
-    private RadioButton rbPersonal;
-    @FXML
-    private RadioButton rbEmpresarial;
-    @FXML
-    ToggleGroup tipo;
 
     /**
      * Initializes the controller class.
@@ -54,37 +46,35 @@ public class DatosController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
-
+    
     @FXML
     private void switchToTertiary(ActionEvent event) throws IOException{
         App.setRoot("tertiary");
     }
-
+    
     @FXML
-    private void guardarCliente(ActionEvent event) {
-        ArrayList<Cliente> clientes = Cliente.cargarClientes("data/Clientes.ser");
-        RadioButton selectedRadioButton = (RadioButton) tipo.getSelectedToggle();
-        String tipo = selectedRadioButton.getText();
+    private void guardarProveedor(ActionEvent event){
+        ArrayList<Proveedor> proveedores = Proveedor.cargarProveedores("data/Proveedores.ser");
         
-        Cliente c = new Cliente(txtCedula.getText(),txtNombre.getText(),txtDireccion.getText(),
-                txtTelefono.getText(),TipoCliente.valueOf(tipo));
+        Proveedor p = new Proveedor(txtCedula.getText(),txtNombre.getText(),txtDireccion.getText(),
+                txtTelefono.getText());
         
-        if (clientes.contains(c)){
-            int ind = clientes.indexOf(c);
-            clientes.set(ind, c);
+        if (proveedores.contains(p)){
+            int ind = proveedores.indexOf(p);
+            proveedores.set(ind, p);
         }else{
-            clientes.add(c);//agregar empleado a la lista
+            proveedores.add(p);//agregar empleado a la lista
         }
         
-        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("data/Clientes.ser"))){
-            out.writeObject(clientes);
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("data/Proveedores.ser"))){
+            out.writeObject(proveedores);
             out.flush();
 
             //mostrar informacion
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Information Dialog");
             alert.setHeaderText("Resultado de la operación");
-            alert.setContentText("Nueva cliente agregado exitosamente");
+            alert.setContentText("Nueva proveedor agregado exitosamente");
 
             alert.showAndWait();
             App.setRoot("tertiary");
@@ -92,22 +82,19 @@ public class DatosController implements Initializable {
         } catch (IOException ex) {
             System.out.println("IOException:" + ex.getMessage());
         }
-
+        
+        
     }
     
-    public void llenarCampos(Cliente c){
-        lblTitulo.setText("Editar Cliente");
+    public void llenarCampos(Proveedor p){
+        lblTitulo.setText("Editar Proveedor");
         txtCedula.setEditable(false);
-        txtCedula.setText(c.getCodigo());
-        txtNombre.setText(c.getNombre());
-        txtDireccion.setText(c.getDireccion());
-        txtTelefono.setText(c.getTelefono());
+        txtCedula.setText(p.getCodigo());
+        txtNombre.setText(p.getNombre());
+        txtDireccion.setText(p.getDireccion());
+        txtTelefono.setText(p.getTelefono());
         
-        if (c.getTipo().equals(TipoCliente.Personal))
-            rbPersonal.setSelected(true);
-        else
-            rbEmpresarial.setSelected(true);
     }
         
+  
 }
-

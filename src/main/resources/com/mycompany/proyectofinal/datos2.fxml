@@ -3,9 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
@@ -15,58 +13,36 @@
 
 <VBox alignment="CENTER" prefHeight="347.0" prefWidth="443.0" spacing="20.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label id="titulo" fx:id="lblTitulo" text="Nuevo Cliente">
+      <Label id="titulo" fx:id="lblTitulo" text="Nuevo Proveedor">
          <font>
             <Font size="26.0" />
          </font>
       </Label>
       <GridPane>
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
          <children>
             <Label text="Cédula:" />
             <Label text="Nombre:" GridPane.rowIndex="1" />
             <Label text="Dirección:" GridPane.rowIndex="2" />
             <Label text="Teléfono:" GridPane.rowIndex="3" />
-            <Label text="Tipo:" GridPane.rowIndex="4" />
             <TextField fx:id="txtCedula" GridPane.columnIndex="1" />
             <TextField fx:id="txtNombre" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="txtDireccion" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <TextField fx:id="txtTelefono" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
-               <children>
-                  <RadioButton fx:id="rbPersonal" mnemonicParsing="false" text="Personal">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                     <HBox.margin>
-                        <Insets left="10.0" right="10.0" top="5.0" />
-                     </HBox.margin>
-                     <toggleGroup>
-                        <ToggleGroup fx:id="tipo" />
-                     </toggleGroup>
-                  </RadioButton>
-                  <RadioButton fx:id="rbEmpresarial" mnemonicParsing="false" text="Empresarial" toggleGroup="$tipo">
-                     <HBox.margin>
-                        <Insets left="10.0" right="10.0" top="5.0" />
-                     </HBox.margin>
-                  </RadioButton>
-               </children>
-            </HBox>
          </children>
       </GridPane>
       <HBox alignment="CENTER" prefHeight="8.0" prefWidth="200.0">
          <children>
-            <Button onAction="#guardarCliente" text="Guardar" />
+            <Button onAction="#guardarProveedor" text="Guardar" />
             <Button mnemonicParsing="false" onAction="#switchToTertiary" text="Cancelar" />
          </children>
       </HBox>

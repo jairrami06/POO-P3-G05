@@ -1,5 +1,6 @@
 package com.mycompany.proyectofinal;
 
+import Enums.TipoCliente;
 import Utilidad.Servicio;
 import java.io.IOException;
 import javafx.event.ActionEvent;
@@ -38,6 +39,9 @@ public class SecondaryController {
     
     public void initialize() {
         modificacionMenu(user);
+        Cliente.serializarClientes();
+        Proveedor.serializarProveedores();
+        Servicio.serializarServicios();
     }
     
 
@@ -67,7 +71,7 @@ public class SecondaryController {
 
     @FXML
     private void boton1(ActionEvent event) throws IOException {
-       o = new Cliente("","","","");
+       o = new Cliente("","","","",TipoCliente.Personal);
        App.setRoot("tertiary");
     }
 

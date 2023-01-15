@@ -3,11 +3,9 @@ package usuario;
 import Utilidad.*;
 import Enums.TipoVehiculo;
 import modelo.*;
-import main.*;
+
 import java.util.*;
-import static main.Sistema.clientes;
-import static main.Sistema.ordenes;
-import static main.Sistema.servicios;
+
 
 
 public class Tecnico extends Usuario{
@@ -28,26 +26,9 @@ public class Tecnico extends Usuario{
     
     //en este metodo se sobreescribe el metodo ingresar menu para mostrar las opciones del sistema de los tecnicos y mediante
     //un switch acceder a cada una de estas opciones asi como admitir el regreso a este mismo menu
-    @Override
-    public void ingresarMenu(){
-        System.out.println("Menú Técnico");
-        System.out.println("1. Generar orden de servicios");
-        System.out.println("2. Reportar falta de insumos");
-        System.out.println("3. Cerrar sesión");
-        int entrada = sc.nextInt();
-        sc.nextLine();
-        switch (entrada) {
-            case 1:
-                genrordenserv();
-                break;
-            case 2:
-                reportarFaltaInsumos();
-            default:
-                break;
-        }
-    }
     //en este metodo se genera la orden del servicio contratado a un tecnico
-    public void genrordenserv(){
+    
+    /*public void genrordenserv(){
         //se utilian dos listas, en la que una se usa para guardar los servicios contratados y en la otra
         //se guarde la cantidad de veces que se ha contratado un servicio en una orden especifica
         ArrayList<Servicio> registroServicios = new ArrayList();
@@ -127,7 +108,7 @@ public class Tecnico extends Usuario{
         ordenes.add(ordenGenerada);
         ordenesTecnico.add(ordenGenerada);
         
-        ingresarMenu();
+        
     }
     //en este metodo se programa la estructura para reportar los insumos faltantes, donde se pide al usuario tecnico una descricion
     //de lo solicitado para darle la opcion de enviar o no el mensaje en forma de correo, y finalmente mostrar una confirmacion del envio
@@ -148,7 +129,7 @@ public class Tecnico extends Usuario{
             borradores.add(descripcion);
         }
         
-        ingresarMenu();
-    }
+    
+    }*/
     
 }

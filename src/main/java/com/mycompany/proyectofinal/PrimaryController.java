@@ -12,7 +12,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import main.Sistema;
 import usuario.*;
 
 public class PrimaryController {
@@ -34,13 +33,13 @@ public class PrimaryController {
     
     @FXML
     private void InicioSesion(ActionEvent event) throws IOException{
-        ArrayList<Usuario> usuarios = Sistema.cargarUsuarios();
+        ArrayList<Usuario> usuarios = Usuario.cargarUsuarios();
         Object evt = event.getSource();
         if(evt.equals(btnIniciarSesion)){
             String usuario = tfUsuario.getText();
             String contra = pfContra.getText();
             
-            int inicio = Sistema.iniciarSesion(usuario,contra);
+            int inicio = Usuario.iniciarSesion(usuario,contra);
             if(inicio != -1){
                 user = usuarios.get(inicio);
                 switchToSecondary();
