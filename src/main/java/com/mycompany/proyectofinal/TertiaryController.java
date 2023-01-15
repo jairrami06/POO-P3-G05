@@ -15,7 +15,11 @@ import javafx.scene.layout.HBox;
 import modelo.*;
 import Utilidad.*;
 import java.io.IOException;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.cell.PropertyValueFactory;
+import main.Sistema;
 /**
  * FXML Controller class
  *
@@ -36,6 +40,8 @@ public class TertiaryController implements Initializable {
     private Button btnAgregar;
     @FXML
     private Button btnEliminar;
+    
+    private ObservableList<Cliente> clientes;
 
     /**
      * Initializes the controller class.
@@ -52,6 +58,7 @@ public class TertiaryController implements Initializable {
     
     public void llenarTabla(Object o){
         if(o instanceof Cliente){
+            clientes = FXCollections.observableArrayList();
             TableView<Cliente> tbTabla = new TableView<>();
             TableColumn colCedula = new TableColumn("Cedula");
             TableColumn colNombre = new TableColumn("Nombre");
@@ -59,6 +66,17 @@ public class TertiaryController implements Initializable {
             TableColumn colTelefono = new TableColumn("Telefono");
             TableColumn colTipo = new TableColumn("Tipo");
             tbTabla.getColumns().addAll(colCedula,colNombre,colDireccion,colTelefono,colTipo);
+            colNombre.setCellValueFactory(new PropertyValueFactory("nombre"));
+            colCedula.setCellValueFactory(new PropertyValueFactory("codigo"));
+            colDireccion.setCellValueFactory(new PropertyValueFactory("direccion"));
+            colTelefono.setCellValueFactory(new PropertyValueFactory("telefono"));
+            if(o instanceof Empresarial){
+                colTipo.setText("Empresarial");
+            }else if(o instanceof Personal){
+                colTipo.setText("Personal");
+            }
+            clientes.addAll(Sistema.cargarClientes());
+            tbTabla.setItems(clientes);
             hbxPrincipal.getChildren().add(tbTabla);
         }else if(o instanceof Servicio){
             TableView<Servicio> tbTabla;

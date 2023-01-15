@@ -19,7 +19,7 @@ public class Sistema {
     
     public static ArrayList<Usuario> cargarUsuarios(){
         usuarios = new ArrayList<>();
-        try(BufferedReader br = new BufferedReader(new FileReader("D:\\POO-P3-G05-master\\src\\main\\java\\archivos\\Usuarios.txt"))){
+        try(BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\jaira\\OneDrive\\Documentos\\NetBeansProjects\\ProyectoFinal\\src\\main\\java\\archivos\\Usuarios.txt"))){
                 br.readLine();
                 String linea;
                 while((linea = br.readLine()) != null){
@@ -45,16 +45,10 @@ public class Sistema {
         return usuarios; 
     }
     
-    //metodo para inicialiazar y cargar los usuarios del sistema por defecto
-    public static void inicializarSistema(){
-        //por consiguiente se inicializan las listas generales del sistema
+    
+    public static ArrayList<Cliente> cargarClientes(){
         clientes = new ArrayList<>();
-        proveedores = new ArrayList<>();
-        servicios = new ArrayList<>();
-        ordenes = new ArrayList<>();
-        //se usa un arraylist para almacenar estos mismos usuarios de la pre carga del sistema
-        
-        try(BufferedReader br = new BufferedReader(new FileReader("D:\\POO-P3-G05-master\\src\\main\\java\\archivos\\Clientes.txt"))){
+        try(BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\jaira\\OneDrive\\Documentos\\NetBeansProjects\\ProyectoFinal\\src\\main\\java\\archivos\\Clientes.txt"))){
             br.readLine();
             String linea;
             while((linea = br.readLine()) != null){
@@ -74,6 +68,17 @@ public class Sistema {
         }catch(Exception e3){
             System.out.println(e3);
         }
+        return clientes; 
+    }
+    
+    //metodo para inicialiazar y cargar los usuarios del sistema por defecto
+    public static void inicializarSistema(){
+        //por consiguiente se inicializan las listas generales del sistema
+        proveedores = new ArrayList<>();
+        servicios = new ArrayList<>();
+        ordenes = new ArrayList<>();
+        //se usa un arraylist para almacenar estos mismos usuarios de la pre carga del sistema
+       
         
         try(BufferedReader br = new BufferedReader(new FileReader("D:\\POO-P3-G05-master\\src\\main\\java\\archivos\\Proveedores.txt"))){
             br.readLine();
