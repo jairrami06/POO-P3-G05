@@ -2,6 +2,7 @@ package com.mycompany.proyectofinal;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,7 +12,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import modelo.Cliente;
 import usuario.*;
 
 public class PrimaryController {
@@ -29,6 +33,19 @@ public class PrimaryController {
     
     private void switchToSecondary() throws IOException {
         App.setRoot("secondary");
+    }
+    
+    @FXML
+    private void switchToMemoria(ActionEvent event) throws IOException{
+        
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("memoria.fxml"));
+        MemoriaController ct = new MemoriaController();
+
+        fxmlLoader.setController(ct);
+        Pane root = (Pane) fxmlLoader.load();
+       
+        
+        App.changeRoot(root);
     }
     
     @FXML

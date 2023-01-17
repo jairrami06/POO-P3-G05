@@ -31,6 +31,10 @@ public class Cliente extends Miembro implements Serializable{
         ordenesClientes = new ArrayList();
     }
     
+    public Cliente(String codigo){
+        this.codigo = codigo;
+    }
+    
     
     public TipoCliente getTipo() {
         return tipo;
