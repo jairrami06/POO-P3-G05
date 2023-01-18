@@ -262,6 +262,7 @@ public class TertiaryController implements Initializable {
         
             Optional<ButtonType> result = alert.showAndWait();
             if(result.get() == ButtonType.OK){
+                //No borrar de la lista si no, ya no mostrarlo en el table view
                 int ind = proveedores.indexOf(p);
                 proveedores.remove(ind);
             }

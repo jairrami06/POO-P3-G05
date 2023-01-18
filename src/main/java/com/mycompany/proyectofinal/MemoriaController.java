@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
@@ -19,6 +20,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -27,6 +29,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import modelo.Cliente;
+import java.util.Date;
 
 /**
  * FXML Controller class
@@ -40,7 +43,7 @@ public class MemoriaController implements Initializable {
     @FXML
     private Label temporizador;
     @FXML
-    private Label intentos;
+    private Label lbAciertos;
     @FXML
     private VBox vbRegistro;
     @FXML
@@ -52,25 +55,28 @@ public class MemoriaController implements Initializable {
 
     public String firstVal = "";
     public Rectangle firstRectangle;
-    public static int seg = 0;
-    public static int min = 3;
-    public static boolean acabo = false;
+    public int seg = 0;
+    public int min = 2;
+    public boolean acabo = false;
+    public boolean clienteValido = false;
 
-    public int aciertos = 0, fallos = 0, intentosInicial = 3;
+    public int aciertos = 0, fallos = 0;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        //TODO
+        
     }
+
     @FXML
     private void switchToPrimary() throws IOException {
-        App.setRoot("primary");   
+        App.setRoot("primary");
     }
-    
+
     @FXML
     public void iniciar(ActionEvent event) {
         ArrayList<Cliente> clientes = Cliente.cargarClientes("data/Clientes.ser");
         Object evt = event.getSource();
+        
         if (evt.equals(btnIniciar)) {
             String cedula = txtCedula.getText();
             String nombre = txtNombre.getText();
@@ -78,11 +84,13 @@ public class MemoriaController implements Initializable {
             Boolean clienteFound = clientes.contains(new Cliente(cedula));
 
             if (clienteFound) {
+                
                 vbRegistro.setVisible(false);
                 vbRegistro.setDisable(true);
                 temporizador.setVisible(true);
-                intentos.setVisible(true);
+                lbAciertos.setVisible(true);
                 panel1.setVisible(true);
+                clienteValido=true;
 
                 try {
                     FileInputStream f = new FileInputStream("data/memoria/card.png");
@@ -103,6 +111,8 @@ public class MemoriaController implements Initializable {
                     }
                     firstVal = "";
                     firstRectangle = new Rectangle();
+                    //iniciarTemporizador();
+                    
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }
@@ -111,7 +121,6 @@ public class MemoriaController implements Initializable {
             }
         }
     }
-    
 
     public static void setTimeout(Runnable runnable, int delay) {
 
@@ -140,8 +149,10 @@ public class MemoriaController implements Initializable {
                 firstRectangle.setDisable(true);
                 firstVal = "";
                 firstRectangle = new Rectangle();
-
+                
                 aciertos += 1;
+                lbAciertos.setText(String.valueOf(aciertos));
+                
 
             } else {
                 try {
@@ -150,7 +161,7 @@ public class MemoriaController implements Initializable {
 
                     rec.setFill(new ImagePattern(img));
 
-                    CompletableFuture.delayedExecutor(1, TimeUnit.SECONDS).execute(() -> {
+                    CompletableFuture.delayedExecutor(600, TimeUnit.MILLISECONDS).execute(() -> {
                         rec.setFill(new ImagePattern(image));
                         firstRectangle.setFill(new ImagePattern(image));
                         firstVal = "";
@@ -236,55 +247,180 @@ public class MemoriaController implements Initializable {
         }
     }
 
-    public void terminarJuego() {
-
-    }
+    
 
     public void mostrarAlerta(Alert.AlertType tipo, String mensaje) {
         Alert alert = new Alert(tipo);
 
         alert.setTitle("Resultado de operacion");
-        alert.setHeaderText("Notificacion");
+        alert.setHeaderText("Notificación");
         alert.setContentText(mensaje);
         alert.showAndWait();
     }
 
-    /*public void iniciarTemporizador(){
-        Thread t = new Thread(() -> {
-            Platform.runLater(new Runnable(){
-                public void run(){
-                    try{
-                        int x = 180;
-                        while(acabo==false){
-                            Thread.sleep(1000);
-                            //System.out.println(x);
-                            x--;
-                            if(seg==0){
-                                seg=59;
-                                min--;
+    public void iniciarTemporizador() {
+        new Thread(){
+            public void run() {
+                try {
+                    
+                    while (acabo == false) {
+                        
+                        if(aciertos == 6){
+                            panel1.setDisable(true);
+                            Platform.runLater(() -> {
+                                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+
+                                alert.setTitle("Resultado de operacion");
+                                alert.setHeaderText("Notificación");
+                                alert.setContentText("¡Encontraste todos los pares!\n¡Bien hecho!");
+                                Optional<ButtonType> result = alert.showAndWait();
+                                if(result.get() == ButtonType.OK){
+                                    try{
+                                        switchToPrimary();
+                                    }catch(Exception e){
+                                        e.printStackTrace();
+                                    }
+                                }
+                            });
+                            acabo = true;
+                            
+                        }
+                        else if(seg == 0 && min == 0){
+                            panel1.setDisable(true);
+                            Platform.runLater(() -> {
+                                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+
+                                alert.setTitle("Resultado de operacion");
+                                alert.setHeaderText("Notificación");
+                                alert.setContentText("¡Se acabó el tiempo!\n¡Juego terminado");
+                                Optional<ButtonType> result = alert.showAndWait();
+                                if(result.get() == ButtonType.OK){
+                                    try{
+                                        switchToPrimary();
+                                    }catch(Exception e){
+                                        e.printStackTrace();
+                                    }
+                                }
+                            });
+                            acabo = true;  
+                        }
+                        
+                        Thread.sleep(1000);
+                        System.out.println(seg);
+                        System.out.println(min);
+                        
+                        if (seg == 0 && min!=0) {
+                            seg = 59;
+                            min--;
+                            String txtSeg = "";
+                            String txtMin = String.valueOf(min);
+
+                            if (seg < 10) {
+                                txtSeg = "0" + String.valueOf(seg);
+                            } else {
+                                txtSeg = String.valueOf(seg);
                             }
+
+                            String txtReloj = txtMin + ":" + txtSeg;
+                            Platform.runLater(() -> temporizador.setText(txtReloj));
+                            
+                            
+                        }else if(seg == 59 && min != 0){
                             seg--;
                             String txtSeg = "";
                             String txtMin = String.valueOf(min);
 
-                            if(seg<10){
-                                txtSeg = "0"+ String.valueOf(seg);
-                            }else{
-                                txtSeg =  String.valueOf(seg);
+                            if (seg < 10) {
+                                txtSeg = "0" + String.valueOf(seg);
+                            } else {
+                                txtSeg = String.valueOf(seg);
                             }
 
-                            String txtReloj = txtMin+":"+txtSeg;
-                            temporizador.setText(txtReloj);
-                            if(x==0){
-                                acabo=true;
+                            String txtReloj = txtMin + ":" + txtSeg;
+                            Platform.runLater(() -> temporizador.setText(txtReloj));
+                        }else if(seg != 59 && seg != 0 && min == 0){
+                            seg--;
+                            String txtSeg = "";
+                            String txtMin = String.valueOf(min);
+
+                            if (seg < 10) {
+                                txtSeg = "0" + String.valueOf(seg);
+                            } else {
+                                txtSeg = String.valueOf(seg);
                             }
+
+                            String txtReloj = txtMin + ":" + txtSeg;
+                            Platform.runLater(() -> temporizador.setText(txtReloj));
+
+                        }else if(seg != 59 && seg != 0 && min != 0){
+                            seg--;
+                            String txtSeg = "";
+                            String txtMin = String.valueOf(min);
+
+                            if (seg < 10) {
+                                txtSeg = "0" + String.valueOf(seg);
+                            } else {
+                                txtSeg = String.valueOf(seg);
+                            }
+
+                            String txtReloj = txtMin + ":" + txtSeg;
+                            Platform.runLater(() -> temporizador.setText(txtReloj));
+                        }else if(seg == 0 && min == 0){
+                            String txtSeg = "";
+                            String txtMin = String.valueOf(min);
+
+                            if (seg < 10) {
+                                txtSeg = "0" + String.valueOf(seg);
+                            } else {
+                                txtSeg = String.valueOf(seg);
+                            }
+
+                            String txtReloj = txtMin + ":" + txtSeg;
+                            Platform.runLater(() -> temporizador.setText(txtReloj));
+                        }else if(seg == 59 && min == 0){
+                            seg--;
+                            String txtSeg = "";
+                            String txtMin = String.valueOf(min);
+
+                            if (seg < 10) {
+                                txtSeg = "0" + String.valueOf(seg);
+                            } else {
+                                txtSeg = String.valueOf(seg);
+                            }
+
+                            String txtReloj = txtMin + ":" + txtSeg;
+                            Platform.runLater(() -> temporizador.setText(txtReloj));
+                        }else if(seg == 0 && min == 0){
+                            String txtSeg = "";
+                            String txtMin = String.valueOf(min);
+
+                            if (seg < 10) {
+                                txtSeg = "0" + String.valueOf(seg);
+                            } else {
+                                txtSeg = String.valueOf(seg);
+                            }
+
+                            String txtReloj = txtMin + ":" + txtSeg;
+                            Platform.runLater(() -> temporizador.setText(txtReloj));
+                            
+                            acabo = true;
                         }
-                    }catch(Exception e){
-                            System.out.println(e.getMessage());
-                    }  
+                        
+                    }
+                } 
+                catch (Exception e) {
+                System.out.println(e.getMessage());
                 }
-            });
-        });
-        t.start();
-    }*/
+            }
+        }.start();
+        
+    }
+    
+    public void guardarResultados(){
+        
+        
+    }
+    
+    
+
 }

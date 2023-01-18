@@ -31,7 +31,7 @@
             <Rectangle fx:id="acondicionador_2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="180.0" layoutX="24.0" layoutY="202.0" onMouseClicked="#changeSource" stroke="BLACK" strokeType="INSIDE" width="150.0" />
          </children>
       </AnchorPane>
-      <Label fx:id="temporizador" layoutX="72.0" layoutY="52.0" text="3:00" visible="false">
+      <Label fx:id="temporizador" layoutX="72.0" layoutY="52.0" text="2:00" visible="false">
          <font>
             <Font size="26.0" />
          </font>
@@ -70,7 +70,7 @@
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </padding>
       </VBox>
-      <Label fx:id="intentos" layoutX="696.0" layoutY="52.0" prefHeight="38.0" prefWidth="40.0" text="3" visible="false">
+      <Label fx:id="lbAciertos" layoutX="696.0" layoutY="52.0" prefHeight="38.0" prefWidth="40.0" text="0" visible="false">
          <font>
             <Font size="26.0" />
          </font>
