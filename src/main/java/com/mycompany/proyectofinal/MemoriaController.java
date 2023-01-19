@@ -90,7 +90,7 @@ public class MemoriaController implements Initializable {
                 temporizador.setVisible(true);
                 lbAciertos.setVisible(true);
                 panel1.setVisible(true);
-                clienteValido=true;
+                //clienteValido=true;
 
                 try {
                     FileInputStream f = new FileInputStream("data/memoria/card.png");
@@ -111,7 +111,8 @@ public class MemoriaController implements Initializable {
                     }
                     firstVal = "";
                     firstRectangle = new Rectangle();
-                    //iniciarTemporizador();
+                    Thread temp = iniciarTemporizador();
+                    temp.start();
                     
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
@@ -258,8 +259,8 @@ public class MemoriaController implements Initializable {
         alert.showAndWait();
     }
 
-    public void iniciarTemporizador() {
-        new Thread(){
+    public  Thread iniciarTemporizador() {
+        Thread temp = new Thread(){
             public void run() {
                 try {
                     
@@ -412,8 +413,8 @@ public class MemoriaController implements Initializable {
                 System.out.println(e.getMessage());
                 }
             }
-        }.start();
-        
+        };
+        return temp;
     }
     
     public void guardarResultados(){
