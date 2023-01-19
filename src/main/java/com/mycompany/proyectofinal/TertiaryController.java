@@ -17,6 +17,7 @@ import modelo.*;
 import Utilidad.*;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Optional;
 import javafx.beans.property.ReadOnlyBooleanWrapper;
 import javafx.collections.FXCollections;
@@ -43,6 +44,8 @@ public class TertiaryController implements Initializable {
     private Button btnAtras;
     @FXML
     private HBox hbxPrincipal;
+    @FXML
+    private Button btnAgregar;
     @FXML
     private Button btnEditar;
     @FXML
@@ -84,6 +87,20 @@ public class TertiaryController implements Initializable {
     private TableColumn<Servicio, String> columnNombreS;
     @FXML
     private TableColumn<Servicio, Double> columnPrecioS;
+    
+    private ArrayList<ClienteJuego> clientesjuego;
+    @FXML
+    private TableView<ClienteJuego> tblClientesJuego;
+    @FXML
+    private TableColumn<ClienteJuego, String> columnNombreCJ;
+    @FXML
+    private TableColumn<ClienteJuego, Date> columnFechaCJ;
+    @FXML
+    private TableColumn<ClienteJuego, String> columnTiempoCJ;
+    @FXML
+    private TableColumn<ClienteJuego, Integer> columnAciertosCJ;
+    @FXML
+    private TableColumn<ClienteJuego, Integer> columnFallosCJ;
 
     /**
      * Initializes the controller class.
@@ -103,8 +120,6 @@ public class TertiaryController implements Initializable {
             lblTitulo.setText("Administrar Clientes");
             clientes = new ArrayList();
             tblClientes.setVisible(true);
-            tblProveedores.setVisible(false);
-            tblServicios.setVisible(false);
       
             columnCedulaC.setCellValueFactory(new PropertyValueFactory<>("codigo"));
             columnNombreC.setCellValueFactory(new PropertyValueFactory<>("nombre"));
@@ -118,8 +133,6 @@ public class TertiaryController implements Initializable {
         }else if(o instanceof Proveedor){
             lblTitulo.setText("Administrar Proveedores");
             proveedores = new ArrayList();
-            tblClientes.setVisible(false);
-            tblServicios.setVisible(false);
             tblProveedores.setVisible(true);
             
             columnCedulaP.setCellValueFactory(new PropertyValueFactory<>("codigo"));
@@ -133,9 +146,7 @@ public class TertiaryController implements Initializable {
         }else if(o instanceof Servicio){
             lblTitulo.setText("Administrar Servicios");
             servicios = new ArrayList();
-            tblClientes.setVisible(false);
             tblServicios.setVisible(true);
-            tblProveedores.setVisible(false);
             
             columnCodigoS.setCellValueFactory(new PropertyValueFactory<>("codigo"));
             columnNombreS.setCellValueFactory(new PropertyValueFactory<>("nombre"));
@@ -144,6 +155,23 @@ public class TertiaryController implements Initializable {
             
             servicios.addAll(Servicio.cargarServicios("data/Servicios.ser"));
             tblServicios.getItems().setAll(servicios);
+        }else if(o instanceof ClienteJuego){
+            btnEditar.setVisible(false);
+            btnAgregar.setVisible(false);
+            btnEliminar.setVisible(false);
+            clientesjuego = new ArrayList();
+            ClienteJuego cj = (ClienteJuego) o;
+            lblTitulo.setText("Clientes del juego");
+            clientesjuego = new ArrayList();
+            tblClientesJuego.setVisible(true);
+            clientesjuego.add(cj);
+            
+            columnNombreCJ.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+            columnFechaCJ.setCellValueFactory(new PropertyValueFactory<>("fecha"));
+            columnAciertosCJ.setCellValueFactory(new PropertyValueFactory<>("aciertos"));
+            columnFallosCJ.setCellValueFactory(new PropertyValueFactory<>("fallos"));
+            columnTiempoCJ.setCellValueFactory(new PropertyValueFactory<>("tiempojuego"));
+            tblClientesJuego.getItems().setAll(clientesjuego);
         }
         
     }

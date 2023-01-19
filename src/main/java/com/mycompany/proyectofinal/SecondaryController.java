@@ -36,6 +36,8 @@ public class SecondaryController {
     private Button btn6;
     @FXML
     private Button btn9;
+    @FXML
+    private Button btnVisJuego;
     
     public void initialize() {
         modificacionMenu(user);
@@ -56,6 +58,7 @@ public class SecondaryController {
             btn1.setVisible(true);
             btn2.setVisible(true);
             btn3.setVisible(true);
+            btnVisJuego.setVisible(true);
         }else if (user instanceof Cobranza){
             lblPrincipal.setText("Bienvenido al menu de Cobranza");
             btn4.setVisible(true);
@@ -110,5 +113,11 @@ public class SecondaryController {
 
     @FXML
     private void boton9(ActionEvent event) {
+    }
+    
+    @FXML
+    private void juego(ActionEvent event) throws IOException {
+        o = MemoriaController.clientejuego;
+        App.setRoot("tertiary");
     }
 }

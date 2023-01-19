@@ -15,9 +15,9 @@
          </font>
       </Label>
       <Button fx:id="btnAtras" layoutX="509.0" layoutY="354.0" mnemonicParsing="false" onAction="#switchToSecondary" text="Atrás" />
-      <Button layoutX="149.0" layoutY="354.0" mnemonicParsing="false" onAction="#editar" text="Editar" />
-      <Button layoutX="52.0" layoutY="354.0" mnemonicParsing="false" onAction="#mostrarVentana" text="Agregar" />
-      <Button layoutX="234.0" layoutY="354.0" mnemonicParsing="false" onAction="#elimnar" text="Eliminar" />
+      <Button fx:id="btnEditar" layoutX="149.0" layoutY="354.0" mnemonicParsing="false" onAction="#editar" text="Editar" />
+      <Button fx:id="btnAgregar" layoutX="52.0" layoutY="354.0" mnemonicParsing="false" onAction="#mostrarVentana" text="Agregar" />
+      <Button fx:id="btnEliminar" layoutX="234.0" layoutY="354.0" mnemonicParsing="false" onAction="#elimnar" text="Eliminar" />
       <TableView fx:id="tblClientes" layoutX="45.0" layoutY="61.0" prefHeight="278.0" prefWidth="378.0" visible="false">
          <columns>
             <TableColumn fx:id="columnCedulaC" prefWidth="75.0" text="Cédula" />
@@ -35,12 +35,21 @@
             <TableColumn fx:id="columnTelefonoP" prefWidth="75.0" text="Teléfono" />
          </columns>
       </TableView>
-      <TableView fx:id="tblServicios" layoutX="60.0" layoutY="61.0" prefHeight="278.0" prefWidth="226.0">
+      <TableView fx:id="tblServicios" layoutX="60.0" layoutY="61.0" prefHeight="278.0" prefWidth="226.0" visible="false">
          <columns>
             <TableColumn fx:id="columnCodigoS" prefWidth="75.0" text="Codigo" />
             <TableColumn fx:id="columnNombreS" prefWidth="75.0" text="Nombre" />
             <TableColumn fx:id="columnPrecioS" prefWidth="75.0" text="Precio" />
          </columns>
+      </TableView>
+      <TableView fx:id="tblClientesJuego" layoutX="27.0" layoutY="78.0" prefHeight="269.0" prefWidth="545.0">
+        <columns>
+          <TableColumn fx:id="columnNombreCJ" prefWidth="125.33331298828125" text="Nombre" />
+          <TableColumn fx:id="columnFechaCJ" prefWidth="205.33334350585938" text="Fecha" />
+            <TableColumn fx:id="columnTiempoCJ" prefWidth="71.3333740234375" text="Tiempo" />
+            <TableColumn fx:id="columnAciertosCJ" prefWidth="68.666748046875" text="Aciertos" />
+            <TableColumn fx:id="columnFallosCJ" prefWidth="75.333251953125" text="Fallos" />
+        </columns>
       </TableView>
    </children>
 </AnchorPane>

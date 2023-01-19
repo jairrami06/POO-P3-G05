@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -30,6 +32,7 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import modelo.Cliente;
 import java.util.Date;
+import modelo.ClienteJuego;
 
 /**
  * FXML Controller class
@@ -38,6 +41,7 @@ import java.util.Date;
  */
 public class MemoriaController implements Initializable {
 
+    public static ClienteJuego clientejuego;
     @FXML
     public Pane panel1;
     @FXML
@@ -59,6 +63,8 @@ public class MemoriaController implements Initializable {
     public int min = 2;
     public boolean acabo = false;
     public boolean clienteValido = false;
+    public String cedula;
+    public String nombre;
 
     public int aciertos = 0, fallos = 0;
 
@@ -78,8 +84,8 @@ public class MemoriaController implements Initializable {
         Object evt = event.getSource();
         
         if (evt.equals(btnIniciar)) {
-            String cedula = txtCedula.getText();
-            String nombre = txtNombre.getText();
+            cedula = txtCedula.getText();
+            nombre = txtNombre.getText();
 
             Boolean clienteFound = clientes.contains(new Cliente(cedula));
 
@@ -284,7 +290,7 @@ public class MemoriaController implements Initializable {
                                 }
                             });
                             acabo = true;
-                            
+                            guardarResultados();
                         }
                         else if(seg == 0 && min == 0){
                             panel1.setDisable(true);
@@ -304,6 +310,7 @@ public class MemoriaController implements Initializable {
                                 }
                             });
                             acabo = true;  
+                            guardarResultados();
                         }
                         
                         Thread.sleep(1000);
@@ -418,10 +425,8 @@ public class MemoriaController implements Initializable {
     }
     
     public void guardarResultados(){
-        
-        
+        String tiempo = String.valueOf(2-min)+":"+String.valueOf(60-seg);
+        Date date = Date.from(Instant.now());
+        clientejuego = new ClienteJuego(nombre,date,tiempo,aciertos,fallos);
     }
-    
-    
-
 }
