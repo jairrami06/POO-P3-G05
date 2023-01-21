@@ -18,6 +18,7 @@ import Utilidad.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Optional;
 import javafx.beans.property.ReadOnlyBooleanWrapper;
 import javafx.collections.FXCollections;
@@ -28,22 +29,43 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
+import usuario.*;
 /**
  * FXML Controller class
  *
  * @author jaira
  */
-public class TertiaryController implements Initializable {
 
+public class TertiaryController implements Initializable {
+    private Usuario user = PrimaryController.user;
     private Object o = SecondaryController.o;
+    public static Orden ordenDetalle;
+    
+    
+    @FXML
+    private Label lblFiltrarpor;
+    @FXML
+    private Label lblCodigo;
+    @FXML
+    private Label lblFecha;
+    @FXML
+    private Label lblCliente;
+    @FXML
+    private Button btnVerDetalle;
+    @FXML
+    private TextField tfFiltroCliente;
+    @FXML
+    private TextField tfFiltroFecha;
+    @FXML
+    private TextField tfFiltroCodigo;
     @FXML
     private Label lblTitulo;
     @FXML
     private Button btnAtras;
-    @FXML
-    private HBox hbxPrincipal;
     @FXML
     private Button btnAgregar;
     @FXML
@@ -102,12 +124,35 @@ public class TertiaryController implements Initializable {
     @FXML
     private TableColumn<ClienteJuego, Integer> columnFallosCJ;
 
+    ObservableList<Orden> filtroOrden;
+    ObservableList<Orden> filtroOrden2;
+    ObservableList<Orden> filtroOrden3;
+    ArrayList<Orden> ordenes;
+    @FXML
+    private TableView<Orden> tblOrdenes;
+    @FXML
+    private TableColumn<Orden, Integer> columnCodigo;
+    @FXML
+    private TableColumn<Orden, String> columnFecha;
+    @FXML
+    private TableColumn<Orden, String> columnNomCliente;
+    @FXML
+    private TableColumn<Orden, Double> columnTotalPagar;
+    @FXML
+    private TextArea txtReporteInsumo;
+    @FXML
+    private Button btnReporte;
+    
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        llenarTabla(o);
+        filtroOrden = FXCollections.observableArrayList();
+        filtroOrden2 = FXCollections.observableArrayList();
+        filtroOrden3 = FXCollections.observableArrayList();
+        llenarTabla(o,user);
     }
 
     @FXML
@@ -115,65 +160,99 @@ public class TertiaryController implements Initializable {
        App.setRoot("secondary");
     }
       
-    public void llenarTabla(Object o){
-        if(o instanceof Cliente){
-            lblTitulo.setText("Administrar Clientes");
-            clientes = new ArrayList();
-            tblClientes.setVisible(true);
-      
-            columnCedulaC.setCellValueFactory(new PropertyValueFactory<>("codigo"));
-            columnNombreC.setCellValueFactory(new PropertyValueFactory<>("nombre"));
-            columnDireccionC.setCellValueFactory(new PropertyValueFactory<>("direccion"));
-            columnTelefonoC.setCellValueFactory(new PropertyValueFactory<>("telefono"));
-            columnTipoC.setCellValueFactory(new PropertyValueFactory<>("tipo"));
-          
-            clientes.addAll(Cliente.cargarClientes("data/Clientes.ser"));
-            tblClientes.getItems().setAll(clientes);
+    public void llenarTabla(Object o, Usuario u){
+        if(u instanceof Admin){
+            if(o instanceof Cliente){
+                lblTitulo.setText("Administrar Clientes");
+                clientes = new ArrayList();
+                tblClientes.setVisible(true);
 
-        }else if(o instanceof Proveedor){
-            lblTitulo.setText("Administrar Proveedores");
-            proveedores = new ArrayList();
-            tblProveedores.setVisible(true);
-            
-            columnCedulaP.setCellValueFactory(new PropertyValueFactory<>("codigo"));
-            columnNombreP.setCellValueFactory(new PropertyValueFactory<>("nombre"));
-            columnDireccionP.setCellValueFactory(new PropertyValueFactory<>("direccion"));
-            columnTelefonoP.setCellValueFactory(new PropertyValueFactory<>("telefono"));
-            
-            proveedores.addAll(Proveedor.cargarProveedores("data/Proveedores.ser"));
-            tblProveedores.getItems().setAll(proveedores);
-            
-        }else if(o instanceof Servicio){
-            lblTitulo.setText("Administrar Servicios");
-            servicios = new ArrayList();
-            tblServicios.setVisible(true);
-            
-            columnCodigoS.setCellValueFactory(new PropertyValueFactory<>("codigo"));
-            columnNombreS.setCellValueFactory(new PropertyValueFactory<>("nombre"));
-            columnPrecioS.setCellValueFactory(new PropertyValueFactory<>("precio"));
-            
-            
-            servicios.addAll(Servicio.cargarServicios("data/Servicios.ser"));
-            tblServicios.getItems().setAll(servicios);
-        }else if(o instanceof ClienteJuego){
-            btnEditar.setVisible(false);
-            btnAgregar.setVisible(false);
-            btnEliminar.setVisible(false);
-            clientesjuego = new ArrayList();
-            ClienteJuego cj = (ClienteJuego) o;
-            lblTitulo.setText("Clientes del juego");
-            clientesjuego = new ArrayList();
-            tblClientesJuego.setVisible(true);
-            clientesjuego.add(cj);
-            
-            columnNombreCJ.setCellValueFactory(new PropertyValueFactory<>("nombre"));
-            columnFechaCJ.setCellValueFactory(new PropertyValueFactory<>("fecha"));
-            columnAciertosCJ.setCellValueFactory(new PropertyValueFactory<>("aciertos"));
-            columnFallosCJ.setCellValueFactory(new PropertyValueFactory<>("fallos"));
-            columnTiempoCJ.setCellValueFactory(new PropertyValueFactory<>("tiempojuego"));
-            tblClientesJuego.getItems().setAll(clientesjuego);
+                columnCedulaC.setCellValueFactory(new PropertyValueFactory<>("codigo"));
+                columnNombreC.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+                columnDireccionC.setCellValueFactory(new PropertyValueFactory<>("direccion"));
+                columnTelefonoC.setCellValueFactory(new PropertyValueFactory<>("telefono"));
+                columnTipoC.setCellValueFactory(new PropertyValueFactory<>("tipo"));
+
+                clientes.addAll(Cliente.cargarClientes("data/Clientes.ser"));
+                tblClientes.getItems().setAll(clientes);
+
+            }else if(o instanceof Proveedor){
+                lblTitulo.setText("Administrar Proveedores");
+                proveedores = new ArrayList();
+                tblProveedores.setVisible(true);
+
+                columnCedulaP.setCellValueFactory(new PropertyValueFactory<>("codigo"));
+                columnNombreP.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+                columnDireccionP.setCellValueFactory(new PropertyValueFactory<>("direccion"));
+                columnTelefonoP.setCellValueFactory(new PropertyValueFactory<>("telefono"));
+
+                proveedores.addAll(Proveedor.cargarProveedores("data/Proveedores.ser"));
+                tblProveedores.getItems().setAll(proveedores);
+
+            }else if(o instanceof Servicio){
+                lblTitulo.setText("Administrar Servicios");
+                servicios = new ArrayList();
+                tblServicios.setVisible(true);
+
+////                columnCodigoS.setCellValueFactory(new PropertyValueFactory<>("codigo"));
+                columnNombreS.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+                columnPrecioS.setCellValueFactory(new PropertyValueFactory<>("precio"));
+
+
+                servicios.addAll(Servicio.cargarServicios());
+                tblServicios.getItems().setAll(servicios);
+            }else if(o instanceof ClienteJuego){
+                tblClientesJuego.setVisible(true);
+                btnEditar.setVisible(false);
+                btnAgregar.setVisible(false);
+                btnEliminar.setVisible(false);
+                clientesjuego = new ArrayList();
+                ClienteJuego cj = (ClienteJuego) o;
+                lblTitulo.setText("Clientes del juego");
+                clientesjuego = new ArrayList();
+                tblClientesJuego.setVisible(true);
+                clientesjuego.add(cj);
+
+                columnNombreCJ.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+                columnFechaCJ.setCellValueFactory(new PropertyValueFactory<>("fecha"));
+                columnAciertosCJ.setCellValueFactory(new PropertyValueFactory<>("aciertos"));
+                columnFallosCJ.setCellValueFactory(new PropertyValueFactory<>("fallos"));
+                columnTiempoCJ.setCellValueFactory(new PropertyValueFactory<>("tiempojuego"));
+                tblClientesJuego.getItems().setAll(clientesjuego);
+            }
+        }else if(u instanceof Tecnico){
+            if (o instanceof Servicio){
+                lblFiltrarpor.setVisible(true);
+                lblCodigo.setVisible(true);
+                lblFecha.setVisible(true);
+                lblCliente.setVisible(true);
+                tblOrdenes.setVisible(true);
+                btnEditar.setVisible(false);
+                btnAgregar.setVisible(false);
+                btnEliminar.setVisible(false);
+                tfFiltroCodigo.setVisible(true);
+                tfFiltroCliente.setVisible(true);
+                tfFiltroFecha.setVisible(true);
+                btnVerDetalle.setVisible(true);
+                lblTitulo.setText("Consultar orden de servicios");
+                
+                columnCodigo.setCellValueFactory(new PropertyValueFactory<>("codOrden"));
+                columnFecha.setCellValueFactory(new PropertyValueFactory<>("fecha"));
+                columnNomCliente.setCellValueFactory(new PropertyValueFactory<>("nombreCliente"));
+                columnTotalPagar.setCellValueFactory(new PropertyValueFactory<>("total"));
+                ordenes = new ArrayList();
+                ordenes.addAll(Orden.cargarOrdenes());
+                tblOrdenes.getItems().setAll(ordenes);
+            }else if (o instanceof Cliente){
+                btnEditar.setVisible(false);
+                btnAgregar.setVisible(false);
+                btnEliminar.setVisible(false);
+                lblTitulo.setText("Reportar falta de insumos");
+                txtReporteInsumo.setVisible(true);
+                btnReporte.setVisible(true);          
+            }
+        }else if(u instanceof Cobranza){
         }
-        
     }
 
     @FXML
@@ -309,8 +388,84 @@ public class TertiaryController implements Initializable {
                 servicios.remove(ind);
             }
         }
-        
+    
+     
         
     }
     
+    @FXML
+    private void filtrarFecha(ActionEvent event) throws IOException{
+        String filtroFec = tfFiltroFecha.getText();
+        
+        if(filtroFec.isEmpty()){
+            tblOrdenes.getItems().setAll(ordenes);
+        }else{
+            filtroOrden3.clear();
+            for(Orden ord: ordenes){
+                if(ord.getFecha().contains(filtroFec)){
+                    filtroOrden3.add(ord);
+                }
+            }
+            tblOrdenes.setItems(filtroOrden3);
+        }    
+    }
+        
+    @FXML
+    private void filtrarCodigo(ActionEvent event) throws IOException{
+        String filtroCod = tfFiltroCodigo.getText();
+        
+        if(filtroCod.isEmpty()){
+            tblOrdenes.getItems().setAll(ordenes);
+        }else{
+            filtroOrden2.clear();
+            for(Orden ord: ordenes){
+                if(String.valueOf(ord.getCodOrden()).contains(filtroCod)){
+                    filtroOrden2.add(ord);
+                }
+            }
+            tblOrdenes.setItems(filtroOrden2);
+        }    
+    }
+        
+    @FXML
+    private void filtrarCliente(ActionEvent event) throws IOException{
+        String filtroNombre = tfFiltroCliente.getText();
+        
+        if(filtroNombre.isEmpty()){
+            tblOrdenes.getItems().setAll(ordenes);
+        }else{
+            filtroOrden.clear();
+            for(Orden ord: ordenes){
+                if(ord.getNombreCliente().contains(filtroNombre)){
+                    filtroOrden.add(ord);
+                }
+            }
+            tblOrdenes.setItems(filtroOrden);
+        }
+    }
+
+    @FXML
+    private void enviarReporte(ActionEvent event) {
+        App.email.add(txtReporteInsumo.getText());
+        mostrarAlerta(Alert.AlertType.CONFIRMATION,"Email enviado");
+        
+    }
+    
+    public void mostrarAlerta(Alert.AlertType tipo, String mensaje) {
+        Alert alert = new Alert(tipo);
+        alert.setTitle("Resultado de operacion");
+        alert.setHeaderText("Notificacion");
+        alert.setContentText(mensaje);
+        alert.showAndWait();
+    }    
+
+    @FXML
+    private void detalleOrden(ActionEvent event) throws IOException {
+        Orden o = tblOrdenes.getSelectionModel().getSelectedItem();
+        
+        if(o != null){
+            ordenDetalle = o;
+            App.setRoot("VerDetalle");
+        }
+    }
 }

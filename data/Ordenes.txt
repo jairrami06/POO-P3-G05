@@ -1,5 +1,5 @@
-CódigoCliente,Fecha,TipoVehiculo,PlacaVehiculo,Servicios
-1,12-04-2022,Automovil,ABA-2301;1,2,3
-2,03-12-2022,Motocicleta,OL-031;4,5
-2,05-12-2022,Bus,MIN-9312;6,1,2
-4,04-01-2023,Automovil,OEA-1242;5,3
+Orden,CódigoCliente,Fecha,NombreCliente,TipoVehiculo,PlacaVehiculo,Total;Servicios;Cantidades
+1,0702942598,12-04-2022,Alex Romero,Automovil,ABA-2301,70.00;Cambio de Aceite,Cambio de Filtro;2,1
+2,0701982339,03-12-2022,TADEC,Motocicleta,OL-031,20.99;Cambio de Aceite,Cambio de Filtro;2,4
+3,0701982339,05-12-2022,TADEC,Bus,MIN-9312,39.50;Cambio de Aceite,Cambio de Filtro;1,2
+4,0708521456,04-01-2023,ENESA,Automovil,OEA-1242,25;Cambio de Aceite,Cambio de Filtro;1,3

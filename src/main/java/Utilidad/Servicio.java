@@ -47,7 +47,7 @@ public class Servicio implements Serializable{
     }
     //metodo tostring para el formato
     public String toString(){
-        return String.format("%s, %s, %s",codigo,nombre,precio);
+        return nombre+"";
     }
     //sobreescritura de equals para las validaciones
     @Override
@@ -109,11 +109,11 @@ public class Servicio implements Serializable{
         }
     }
     
-    public static ArrayList<Servicio> cargarServicios(String ruta) {
+    public static ArrayList<Servicio> cargarServicios() {
         ArrayList<Servicio> lServicios = new ArrayList<>();
         
        //leer la lista de personas del archivo serializado
-        try (ObjectInputStream oi = new ObjectInputStream(new FileInputStream(ruta))) {
+        try (ObjectInputStream oi = new ObjectInputStream(new FileInputStream("data/Servicios.ser"))) {
             lServicios = (ArrayList<Servicio>) oi.readObject();
             System.out.println("=============");
             // System.out.println(empleados);

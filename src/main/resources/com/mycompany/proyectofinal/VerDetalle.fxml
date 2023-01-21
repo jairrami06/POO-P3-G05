@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.proyectofinal.VerDetalleController">
+   <children>
+      <Label layoutX="201.0" layoutY="23.0" text="Detalle de orden">
+         <font>
+            <Font size="27.0" />
+         </font>
+      </Label>
+      <Label layoutX="32.0" layoutY="76.0" text="Código de orden">
+         <font>
+            <Font size="13.0" />
+         </font>
+         <effect>
+            <Blend />
+         </effect>
+      </Label>
+      <Label layoutX="32.0" layoutY="112.0" prefHeight="25.0" prefWidth="103.0" text="Cliente">
+         <font>
+            <Font size="13.0" />
+         </font>
+         <effect>
+            <Blend />
+         </effect>
+      </Label>
+      <Label layoutX="32.0" layoutY="147.0" prefHeight="25.0" prefWidth="103.0" text="Fecha">
+         <font>
+            <Font size="13.0" />
+         </font>
+         <effect>
+            <Blend />
+         </effect>
+      </Label>
+      <Label layoutX="276.0" layoutY="72.0" prefHeight="25.0" prefWidth="103.0" text="Tipo de vehículo">
+         <font>
+            <Font size="13.0" />
+         </font>
+         <effect>
+            <Blend />
+         </effect>
+      </Label>
+      <Label layoutX="276.0" layoutY="112.0" prefHeight="25.0" prefWidth="103.0" text="Placa">
+         <font>
+            <Font size="13.0" />
+         </font>
+         <effect>
+            <Blend />
+         </effect>
+      </Label>
+      <Label layoutX="276.0" layoutY="147.0" prefHeight="25.0" prefWidth="103.0" text="Total a pagar">
+         <font>
+            <Font size="13.0" />
+         </font>
+         <effect>
+            <Blend />
+         </effect>
+      </Label>
+      <Label fx:id="txtOrden" layoutX="142.0" layoutY="79.0" />
+      <Label fx:id="txtCliente" layoutX="142.0" layoutY="118.0" />
+      <Label fx:id="txtFecha" layoutX="142.0" layoutY="153.0" />
+      <Label fx:id="txtTotal" layoutX="386.0" layoutY="153.0" />
+      <Label fx:id="txtPlaca" layoutX="386.0" layoutY="118.0" />
+      <Label fx:id="txtTipoVehiculo" layoutX="386.0" layoutY="79.0" />
+      <TableView fx:id="tblDetalle" layoutX="14.0" layoutY="180.0" prefHeight="200.0" prefWidth="471.0">
+        <columns>
+          <TableColumn fx:id="clmServicio" prefWidth="164.66659545898438" text="Servicio" />
+          <TableColumn fx:id="clmPrecio" prefWidth="86.666748046875" text="Precio" />
+            <TableColumn fx:id="clmCantidad" prefWidth="87.33331298828125" text="Cantidad" />
+            <TableColumn fx:id="clmSubtotal" prefWidth="134.66668701171875" text="Subtotal" />
+        </columns>
+      </TableView>
+      <Button layoutX="517.0" layoutY="360.0" mnemonicParsing="false" onAction="#regresar" text="Atrás" />
+   </children>
+</AnchorPane>

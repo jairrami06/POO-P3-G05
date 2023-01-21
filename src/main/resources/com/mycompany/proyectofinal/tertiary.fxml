@@ -4,6 +4,9 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Blend?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -42,7 +45,7 @@
             <TableColumn fx:id="columnPrecioS" prefWidth="75.0" text="Precio" />
          </columns>
       </TableView>
-      <TableView fx:id="tblClientesJuego" layoutX="27.0" layoutY="78.0" prefHeight="269.0" prefWidth="545.0">
+      <TableView fx:id="tblClientesJuego" layoutX="27.0" layoutY="78.0" prefHeight="269.0" prefWidth="545.0" visible="false">
         <columns>
           <TableColumn fx:id="columnNombreCJ" prefWidth="125.33331298828125" text="Nombre" />
           <TableColumn fx:id="columnFechaCJ" prefWidth="205.33334350585938" text="Fecha" />
@@ -51,5 +54,51 @@
             <TableColumn fx:id="columnFallosCJ" prefWidth="75.333251953125" text="Fallos" />
         </columns>
       </TableView>
+      <TableView fx:id="tblOrdenes" layoutX="14.0" layoutY="72.0" prefHeight="313.0" prefWidth="384.0" visible="false">
+        <columns>
+          <TableColumn fx:id="columnCodigo" prefWidth="75.0" text="Código" />
+          <TableColumn fx:id="columnFecha" prefWidth="75.0" text="Fecha" />
+            <TableColumn fx:id="columnNomCliente" prefWidth="135.99993896484375" text="Nombre del cliente" />
+            <TableColumn fx:id="columnTotalPagar" prefWidth="96.666748046875" text="Total a pagar" />
+        </columns>
+      </TableView>
+      <Label fx:id="lblFiltrarpor" layoutX="443.0" layoutY="78.0" text="Filtrar por:" visible="false">
+         <font>
+            <Font size="24.0" />
+         </font>
+         <effect>
+            <Blend />
+         </effect>
+      </Label>
+      <Label fx:id="lblCodigo" layoutX="421.0" layoutY="129.0" text="Código" visible="false">
+         <font>
+            <Font size="17.0" />
+         </font>
+         <effect>
+            <Blend />
+         </effect>
+      </Label>
+      <Label fx:id="lblFecha" layoutX="427.0" layoutY="187.0" text="Fecha" visible="false">
+         <font>
+            <Font size="17.0" />
+         </font>
+         <effect>
+            <Blend />
+         </effect>
+      </Label>
+      <Label fx:id="lblCliente" layoutX="423.0" layoutY="241.0" text="Cliente" visible="false">
+         <font>
+            <Font size="17.0" />
+         </font>
+         <effect>
+            <Blend />
+         </effect>
+      </Label>
+      <TextField fx:id="tfFiltroFecha" layoutX="423.0" layoutY="216.0" onAction="#filtrarFecha" visible="false" />
+      <TextField fx:id="tfFiltroCodigo" layoutX="423.0" layoutY="161.0" onAction="#filtrarCodigo" visible="false" />
+      <TextField fx:id="tfFiltroCliente" layoutX="423.0" layoutY="267.0" onAction="#filtrarCliente" visible="false" />
+      <Button fx:id="btnVerDetalle" layoutX="431.0" layoutY="354.0" mnemonicParsing="false" onAction="#detalleOrden" text="Ver Detalle" visible="false" />
+      <TextArea fx:id="txtReporteInsumo" layoutX="49.0" layoutY="129.0" prefHeight="200.0" prefWidth="523.0" visible="false" />
+      <Button fx:id="btnReporte" layoutX="253.0" layoutY="354.0" mnemonicParsing="false" onAction="#enviarReporte" text="Enviar Reporte" visible="false" />
    </children>
 </AnchorPane>

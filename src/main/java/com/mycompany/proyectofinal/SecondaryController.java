@@ -1,6 +1,7 @@
 package com.mycompany.proyectofinal;
 
 import Enums.TipoCliente;
+import Utilidad.Orden;
 import Utilidad.Servicio;
 import java.io.IOException;
 import javafx.event.ActionEvent;
@@ -40,6 +41,7 @@ public class SecondaryController {
     private Button btnVisJuego;
     
     public void initialize() {
+        Orden.serializarOrdenes();
         modificacionMenu(user);
         Cliente.serializarClientes();
         Proveedor.serializarProveedores();
@@ -64,7 +66,7 @@ public class SecondaryController {
             btn4.setVisible(true);
             btn5.setVisible(true);
             btn6.setVisible(true);
-        }else if (user instanceof Tecnico){
+        }else if (user instanceof Tecnico){         
             lblPrincipal.setText("Bienvenido al menu de Técnico");
             btn7.setVisible(true);
             btn8.setVisible(true);
@@ -96,7 +98,9 @@ public class SecondaryController {
     }
 
     @FXML
-    private void boton7(ActionEvent event) {
+    private void boton7(ActionEvent event) throws IOException {
+        o = new Servicio();
+        App.setRoot("tertiary");    
     }
 
     @FXML
@@ -104,7 +108,9 @@ public class SecondaryController {
     }
 
     @FXML
-    private void boton8(ActionEvent event) {
+    private void boton8(ActionEvent event) throws IOException {
+        o = new Orden();
+        App.setRoot("datos4");
     }
 
     @FXML
@@ -112,7 +118,10 @@ public class SecondaryController {
     }
 
     @FXML
-    private void boton9(ActionEvent event) {
+    private void boton9(ActionEvent event) throws IOException {
+        o = new Cliente();
+        App.setRoot("tertiary"); 
+        
     }
     
     @FXML

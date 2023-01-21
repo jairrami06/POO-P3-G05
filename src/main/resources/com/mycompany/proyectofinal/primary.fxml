@@ -42,13 +42,13 @@
                               <Font size="17.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="tfUsuario" />
+                        <TextField fx:id="tfUsuario" text="alopez" />
                         <Label text="Clave">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </Label>
-                        <PasswordField fx:id="pfContra" />
+                        <PasswordField fx:id="pfContra" text="al123456" />
                         <Button fx:id="btnIniciarSesion" contentDisplay="CENTER" mnemonicParsing="false" onAction="#InicioSesion" text="Iniciar sesión">
                            <VBox.margin>
                               <Insets left="60.0" top="10.0" />

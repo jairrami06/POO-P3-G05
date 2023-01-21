@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" prefHeight="347.0" prefWidth="443.0" spacing="20.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.proyectofinal.Datos4Controller">
+   <children>
+      <Label id="titulo" fx:id="lblTitulo" text="Nueva Orden de servicios">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+      <GridPane prefHeight="106.0" prefWidth="403.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label text="Codigo del cliente:" />
+            <Label text="Fecha de servicio" GridPane.rowIndex="1" />
+            <Label text="Tipo de Vehiculo" GridPane.rowIndex="2" />
+            <TextField fx:id="txtFecha" promptText="dd--mm-yyyy" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <ComboBox fx:id="cmbCliente" prefHeight="25.0" prefWidth="169.0" promptText="Seleccione un cliente" GridPane.columnIndex="1" />
+            <ComboBox fx:id="cmbVehiculo" prefHeight="25.0" prefWidth="169.0" promptText="Seleccione un tipo" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+         </children>
+      </GridPane>
+      <GridPane prefHeight="83.0" prefWidth="323.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="207.33333333333334" minWidth="10.0" prefWidth="79.00002797444662" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="323.6666386922201" minWidth="10.0" prefWidth="323.6666386922201" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button fx:id="bntaggser" mnemonicParsing="false" onAction="#agregarServicio" text="Agregar servicio" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label text="Servicio" />
+            <ComboBox fx:id="cmbServicio" prefHeight="25.0" prefWidth="169.0" promptText="Seleccione un servicio" GridPane.columnIndex="1" />
+            <Label text="Cantidad" GridPane.rowIndex="1" />
+            <TextField fx:id="txtCantidad" prefHeight="25.0" prefWidth="151.0" promptText="1,2,3....." GridPane.columnIndex="1" GridPane.rowIndex="1" />
+         </children>
+      </GridPane>
+      <HBox alignment="CENTER" prefHeight="8.0" prefWidth="200.0">
+         <children>
+            <Button onAction="#guardarOrden" text="Guardar" />
+            <Button mnemonicParsing="false" onAction="#switchToTertiary" text="Cancelar" />
+         </children>
+      </HBox>
+   </children>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+</VBox>

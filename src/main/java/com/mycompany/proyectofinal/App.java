@@ -7,12 +7,14 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import usuario.Usuario;
 
 /**
  * JavaFX App
  */
 public class App extends Application {
-
+    public final static ArrayList<String> email = new ArrayList();
     private static Scene scene;
 
     @Override
