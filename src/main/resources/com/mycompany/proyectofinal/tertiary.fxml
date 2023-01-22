@@ -100,5 +100,14 @@
       <Button fx:id="btnVerDetalle" layoutX="431.0" layoutY="354.0" mnemonicParsing="false" onAction="#detalleOrden" text="Ver Detalle" visible="false" />
       <TextArea fx:id="txtReporteInsumo" layoutX="49.0" layoutY="129.0" prefHeight="200.0" prefWidth="523.0" visible="false" />
       <Button fx:id="btnReporte" layoutX="253.0" layoutY="354.0" mnemonicParsing="false" onAction="#enviarReporte" text="Enviar Reporte" visible="false" />
+      <Button fx:id="btnNuevaFactura" layoutX="160.0" layoutY="304.0" mnemonicParsing="false" onAction="#nuevaFact" text="Nueva Factura" visible="false" />
+      <Button fx:id="btnDetalleFact" layoutX="374.0" layoutY="304.0" mnemonicParsing="false" onAction="#detalleFact" text="Ver Detalle" visible="false" />
+      <TableView fx:id="tblFactura" layoutX="69.0" layoutY="78.0" prefHeight="200.0" prefWidth="451.0" visible="false">
+        <columns>
+          <TableColumn fx:id="clmEmpresa" prefWidth="138.66665649414062" text="Empresa" />
+          <TableColumn fx:id="clmPeriodo" prefWidth="165.33331298828125" text="Periodo" />
+            <TableColumn fx:id="clmTotalAPagar" prefWidth="146.6666259765625" text="Total a pagar" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>

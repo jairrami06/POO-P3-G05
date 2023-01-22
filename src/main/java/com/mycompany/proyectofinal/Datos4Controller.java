@@ -32,12 +32,16 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import modelo.*;
+import usuario.Tecnico;
+import usuario.Usuario;
 /**
  * FXML Controller class
  *
  * @author oweny
  */
 public class Datos4Controller implements Initializable {
+    
+    Usuario u = PrimaryController.user;
     
     @FXML
     private Label lblTitulo;
@@ -51,8 +55,6 @@ public class Datos4Controller implements Initializable {
     @FXML
     private ComboBox cmbVehiculo;
     @FXML
-    private Button bntaggser;
-    @FXML
     private ComboBox<Servicio> cmbServicio;
     @FXML
     private TextField txtCantidad;
@@ -61,6 +63,8 @@ public class Datos4Controller implements Initializable {
     ArrayList<Servicio> serviciosorden;
     ArrayList<Integer> cantidades;
     double total = 0;
+    @FXML
+    private TextField tfPlaca;
     
     
     /**
@@ -81,29 +85,26 @@ public class Datos4Controller implements Initializable {
         App.setRoot("secondary");
     }
 
-    @FXML
-    private void agregarServicio(ActionEvent event) {      
-        Servicio s = (Servicio) cmbServicio.getValue();
-        int cant = Integer.valueOf(txtCantidad.getText());
-        serviciosorden.add(s);
-        cantidades.add(cant);
-        total += s.getPrecio()*cant;
-        cmbServicio.setValue(null);
-        txtCantidad.clear();     
-    }
 
     @FXML
     private void guardarOrden(ActionEvent event) {
         ArrayList<Orden> ordenes = Orden.cargarOrdenes("data/Ordenes.ser");
+        Servicio s = (Servicio) cmbServicio.getValue();
+        int cant = Integer.valueOf(txtCantidad.getText());
         int cod = ordenes.size();
         Cliente c = (Cliente) cmbCliente.getValue();
         int ind = clientes.indexOf(c);
         Cliente cli = clientes.get(ind);
         String fecha = txtFecha.getText();
         String tipov = String.valueOf(cmbVehiculo.getValue());
-        Orden nuevao = new Orden(cod,cli.getCodigo(),fecha,cli.getNombre(),total,tipov,String.valueOf(cmbVehiculo.getValue()),serviciosorden,cantidades);
+     
+        total += s.getPrecio()*cant;
+        Orden nuevao = new Orden(cod,cli.getCodigo(),fecha,cli.getNombre(),total,tipov,tfPlaca.getText(),s.getCodigo(),cant,s.getNombre(),u.getNombre());
         ordenes.add(nuevao);  
-               
+        Tecnico t = (Tecnico) u;
+        t.getOrdenesTecnico().add(nuevao);
+        cmbServicio.setValue(null);
+        txtCantidad.clear();   
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("data/ordenes.ser"))){
             out.writeObject(ordenes);
             out.flush();
@@ -121,6 +122,7 @@ public class Datos4Controller implements Initializable {
             total = 0;
             cmbCliente.setValue(null);
             cmbVehiculo.setValue(null);
+            tfPlaca.clear();
             
 
         } catch (IOException ex) {

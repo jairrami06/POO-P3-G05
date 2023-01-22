@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="638.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.proyectofinal.VerDetalleFactController">
+   <children>
+      <Label layoutX="213.0" layoutY="29.0" text="Detalle de facturación">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="29.0" layoutY="68.0" text="Empresa:">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="336.0" layoutY="68.0" text="Periodo facturación:">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="txtEmpresas" layoutX="88.0" layoutY="68.0" text="Label">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="txtPeriodo" layoutX="463.0" layoutY="68.0" text="Label">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="24.0" layoutY="104.0" text="Detalle de servicios:">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tblDetalle" layoutX="13.0" layoutY="152.0" prefHeight="198.0" prefWidth="612.0">
+        <columns>
+          <TableColumn fx:id="clmPlaca" text="Placa" />
+          <TableColumn fx:id="clmFecha" prefWidth="87.33334350585938" text="Fecha" />
+            <TableColumn fx:id="clmVehiculo" prefWidth="114.66670227050781" text="Vehiculo" />
+            <TableColumn fx:id="clmServicio" minWidth="0.0" prefWidth="106.66668701171875" text="Servicio" />
+            <TableColumn fx:id="clmCantidad" prefWidth="121.99996948242188" text="Cantidad" />
+            <TableColumn fx:id="clmTotal" prefWidth="99.33331298828125" text="Total" />
+        </columns>
+      </TableView>
+      <Button layoutX="531.0" layoutY="361.0" mnemonicParsing="false" onAction="#salir" text="Atrás" />
+   </children>
+</AnchorPane>

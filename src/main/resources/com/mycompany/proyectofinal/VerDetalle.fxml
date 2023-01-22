@@ -69,22 +69,13 @@
       <Label fx:id="txtTotal" layoutX="386.0" layoutY="153.0" />
       <Label fx:id="txtPlaca" layoutX="386.0" layoutY="118.0" />
       <Label fx:id="txtTipoVehiculo" layoutX="386.0" layoutY="79.0" />
-      <TableView fx:id="tblDetalle" layoutX="14.0" layoutY="180.0" prefHeight="200.0" prefWidth="254.0">
+      <TableView fx:id="tblDetalle" layoutX="107.0" layoutY="180.0" prefHeight="200.0" prefWidth="343.0">
         <columns>
-          <TableColumn fx:id="clmServicio" prefWidth="164.66659545898438" text="Servicio" />
-          <TableColumn fx:id="clmPrecio" prefWidth="86.666748046875" text="Precio" />
+          <TableColumn fx:id="clmServicio" prefWidth="132.66665649414062" text="Servicio" />
+          <TableColumn fx:id="clmPrecio" prefWidth="107.33331298828125" text="Precio" />
+          <TableColumn fx:id="clmCantidad" prefWidth="102.0" text="Cantidad" />
         </columns>
       </TableView>
       <Button layoutX="517.0" layoutY="360.0" mnemonicParsing="false" onAction="#regresar" text="Atrás" />
-      <TableView fx:id="tblCantidad" layoutX="267.0" layoutY="180.0" prefHeight="200.0" prefWidth="77.0">
-        <columns>
-          <TableColumn fx:id="clmCantidad" prefWidth="75.0" text="Cantidad" />
-        </columns>
-      </TableView>
-      <TableView fx:id="tblSubtotal" layoutX="343.0" layoutY="180.0" prefHeight="200.0" prefWidth="77.0">
-        <columns>
-          <TableColumn fx:id="clmSubtotal" prefWidth="75.0" text="Subtotal" />
-        </columns>
-      </TableView>
    </children>
 </AnchorPane>

@@ -46,6 +46,7 @@ public class TertiaryController implements Initializable {
     private Usuario user = PrimaryController.user;
     private Object o = SecondaryController.o;
     public static Orden ordenDetalle;
+    public static Factura facturaDetalle;
     
     
     @FXML
@@ -68,8 +69,6 @@ public class TertiaryController implements Initializable {
     private Label lblTitulo;
     @FXML
     private Button btnAtras;
-    @FXML
-    private HBox hbxPrincipal;
     @FXML
     private Button btnAgregar;
     @FXML
@@ -146,6 +145,20 @@ public class TertiaryController implements Initializable {
     private TextArea txtReporteInsumo;
     @FXML
     private Button btnReporte;
+    
+    private ArrayList<Factura> facturas;
+    @FXML
+    private Button btnNuevaFactura;
+    @FXML
+    private TableView<Factura> tblFactura;
+    @FXML
+    private TableColumn<Factura, String> clmEmpresa;
+    @FXML
+    private TableColumn<Factura, String> clmPeriodo;
+    @FXML
+    private TableColumn<Factura, Double> clmTotalAPagar;
+    @FXML
+    private Button btnDetalleFact;
     
     
     /**
@@ -245,7 +258,7 @@ public class TertiaryController implements Initializable {
                 columnNomCliente.setCellValueFactory(new PropertyValueFactory<>("nombreCliente"));
                 columnTotalPagar.setCellValueFactory(new PropertyValueFactory<>("total"));
                 ordenes = new ArrayList();
-                ordenes.addAll(Orden.cargarOrdenes("data/Ordenes.ser"));
+                ordenes.addAll(Orden.cargarOrdenes("data/ordenes.ser"));
                 tblOrdenes.getItems().setAll(ordenes);
             }else if (o instanceof Cliente){
                 btnEditar.setVisible(false);
@@ -256,6 +269,27 @@ public class TertiaryController implements Initializable {
                 btnReporte.setVisible(true);          
             }
         }else if(u instanceof Cobranza){
+            if(o instanceof Servicio){
+                lblTitulo.setText("Factura a empresas");
+                btnEditar.setVisible(false);
+                btnAgregar.setVisible(false);
+                btnEliminar.setVisible(false);
+                btnNuevaFactura.setVisible(true);
+                btnDetalleFact.setVisible(true);
+                tblFactura.setVisible(true);
+                clmTotalAPagar.setCellValueFactory(new PropertyValueFactory<>("total"));
+                clmPeriodo.setCellValueFactory(new PropertyValueFactory<>("periodo"));
+                clmEmpresa.setCellValueFactory(new PropertyValueFactory<>("codigoEmpresa"));
+                
+                facturas = Factura.cargarFacturas("data/Facturas.ser");
+                tblFactura.getItems().setAll(facturas);
+                
+            }else if(o instanceof Cliente){
+   
+            }else if(o instanceof Orden){
+                lblTitulo.setText("Reporte de ingresos por servicio");
+            }
+           
         }
     }
 
@@ -472,4 +506,21 @@ public class TertiaryController implements Initializable {
             App.setRoot("VerDetalle");
         }
     }
+
+    @FXML
+    private void nuevaFact(ActionEvent event) throws IOException {
+        App.setRoot("nuevFact"); 
+    }
+
+    @FXML
+    private void detalleFact(ActionEvent event) throws IOException {
+        Factura f = tblFactura.getSelectionModel().getSelectedItem();
+        
+        if(o != null){
+            facturaDetalle = f;
+            App.setRoot("VerDetalleFact"); 
+        }      
+    }
+    
+        
 }

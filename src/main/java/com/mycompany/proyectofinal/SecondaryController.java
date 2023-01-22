@@ -92,7 +92,9 @@ public class SecondaryController {
 
 
     @FXML
-    private void boton4(ActionEvent event) {
+    private void boton4(ActionEvent event) throws IOException {
+        o = new Servicio();
+        App.setRoot("tertiary");
     }
 
     @FXML
@@ -102,17 +104,18 @@ public class SecondaryController {
     }
 
     @FXML
-    private void boton5(ActionEvent event) {
+    private void boton5(ActionEvent event) throws IOException {
+        App.setRoot("ingresoPorServicios");
     }
 
     @FXML
     private void boton8(ActionEvent event) throws IOException {
-        o = new Orden();
         App.setRoot("datos4");
     }
 
     @FXML
-    private void boton6(ActionEvent event) {
+    private void boton6(ActionEvent event) throws IOException {
+        App.setRoot("ingresoPorTecnico");
     }
 
     @FXML

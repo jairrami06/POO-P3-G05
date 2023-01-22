@@ -24,16 +24,24 @@ public class Orden implements Serializable{
     private String placa;
     private String tipovehiculo;
     private String tecnico;
-    private  ArrayList<Servicio> registroServicio;
-    private  ArrayList<Integer> registroCantidades;
+    private  int codigoServicio;
+    private  int cantidad;
+    private String nombreServicio;
     private static ArrayList<Orden> ordenes;
     
     public Orden(){
     
     }
+    
+    public Orden(String nombreServicio, double total,String tecnico) {
+        this.tecnico = tecnico;
+        this.nombreServicio = nombreServicio;
+        this.total = total;
+    }
+    
    
     //mconstructor de la clase orden
-    public Orden(int codOrden, String codigoCliente, String fecha,String nombreCliente ,double total, String tipovehiculo,String placa, ArrayList<Servicio> registroServicio, ArrayList<Integer> registroCantidades) {
+    public Orden(int codOrden, String codigoCliente, String fecha,String nombreCliente ,double total, String tipovehiculo,String placa, int codigoServicio, int cantidad, String nombreServicio,String tecnico) {
         this.codOrden = codOrden;
         this.codigoCliente = codigoCliente;
         this.nombreCliente = nombreCliente;
@@ -41,8 +49,10 @@ public class Orden implements Serializable{
         this.total = total;
         this.placa = placa;
         this.tipovehiculo = tipovehiculo;
-        this.registroServicio = registroServicio;
-        this.registroCantidades = registroCantidades;
+        this.codigoServicio = codigoServicio;
+        this.cantidad = cantidad;
+        this.nombreServicio = nombreServicio;
+        this.tecnico = tecnico;
         
     }
     
@@ -50,15 +60,22 @@ public class Orden implements Serializable{
     public String getFecha() {
         return fecha;
     }
+
+    public int getCodigoServicio() {
+        return codigoServicio;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public String getNombreServicio() {
+        return nombreServicio;
+    }
+    
+    
     
 
-    public ArrayList<Servicio> getRegistroServicio() {
-        return registroServicio;
-    }
-
-    public ArrayList<Integer> getRegistroCantidades() {
-        return registroCantidades;
-    }
 
     public String getTecnico() {
         return tecnico;
@@ -118,7 +135,7 @@ public class Orden implements Serializable{
     }
     
     public static void guardarOrdenesS(Orden o){
-        try(ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("data/Ordenes.ser"))){
+        try(ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("data/ordenes.ser"))){
             ordenes.add(o);
             out.writeObject(ordenes);
         }catch(FileNotFoundException e1){

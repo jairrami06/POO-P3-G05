@@ -4,14 +4,13 @@
  */
 package com.mycompany.proyectofinal;
 
+import Utilidad.Factura;
 import Utilidad.Orden;
 import Utilidad.Servicio;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.Set;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -19,63 +18,54 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.util.Callback;
 
 /**
  * FXML Controller class
  *
  * @author jaira
  */
-public class VerDetalleController implements Initializable {
-
-    Orden o = TertiaryController.ordenDetalle;
-    
-    
+public class VerDetalleFactController implements Initializable {
+    Factura f = TertiaryController.facturaDetalle;
     @FXML
-    private Label txtOrden;
+    private Label txtEmpresas;
     @FXML
-    private Label txtCliente;
+    private Label txtPeriodo;
     @FXML
-    private Label txtFecha;
+    private TableColumn<Orden, String> clmPlaca;
     @FXML
-    private Label txtTotal;
+    private TableColumn<Orden, String> clmFecha;
     @FXML
-    private Label txtPlaca;
-    @FXML
-    private Label txtTipoVehiculo;
-    @FXML
-    private TableView<Orden> tblDetalle;
+    private TableColumn<Orden, String> clmVehiculo;
     @FXML
     private TableColumn<Orden, String> clmServicio;
     @FXML
-    private TableColumn<Orden, Double> clmPrecio;
-    @FXML
     private TableColumn<Orden, Integer> clmCantidad;
+    @FXML
+    private TableColumn<Orden, Double> clmTotal;
+    @FXML
+    private TableView<Orden> tblDetalle;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-        txtOrden.setText(String.valueOf(o.getCodOrden()));
-        txtCliente.setText(o.getNombreCliente());
-        txtFecha.setText(o.getFecha());
-        txtPlaca.setText(o.getPlaca());
-        txtTotal.setText(String.valueOf(o.getTotal()));
-        txtTipoVehiculo.setText(o.getTipovehiculo());
+        txtEmpresas.setText(f.getCodigoEmpresa());
+        txtPeriodo.setText(f.getPeriodo());
+        clmPlaca.setCellValueFactory(new PropertyValueFactory<>("placa"));
+        clmFecha.setCellValueFactory(new PropertyValueFactory<>("fecha"));
+        clmVehiculo.setCellValueFactory(new PropertyValueFactory<>("tipovehiculo"));
         clmServicio.setCellValueFactory(new PropertyValueFactory<>("nombreServicio"));
-        clmPrecio.setCellValueFactory(new PropertyValueFactory<>("precio"));
         clmCantidad.setCellValueFactory(new PropertyValueFactory<>("cantidad"));
-       
+        clmTotal.setCellValueFactory(new PropertyValueFactory<>("total"));
         
-            
-        
-        
-        
-    }  
+      
+        tblDetalle.getItems().setAll(f.getOrdenes());
+  
+    }    
 
     @FXML
-    private void regresar(ActionEvent event) throws IOException {
+    private void salir(ActionEvent event) throws IOException {
         App.setRoot("secondary");
     }
     

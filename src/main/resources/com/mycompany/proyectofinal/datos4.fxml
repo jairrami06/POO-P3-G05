@@ -19,12 +19,13 @@
             <Font size="26.0" />
          </font>
       </Label>
-      <GridPane prefHeight="106.0" prefWidth="403.0">
+      <GridPane prefHeight="133.0" prefWidth="403.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
          </columnConstraints>
          <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -36,24 +37,24 @@
             <TextField fx:id="txtFecha" promptText="dd--mm-yyyy" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <ComboBox fx:id="cmbCliente" prefHeight="25.0" prefWidth="169.0" promptText="Seleccione un cliente" GridPane.columnIndex="1" />
             <ComboBox fx:id="cmbVehiculo" prefHeight="25.0" prefWidth="169.0" promptText="Seleccione un tipo" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label text="Placa" GridPane.rowIndex="3" />
+            <TextField fx:id="tfPlaca" GridPane.columnIndex="1" GridPane.rowIndex="3" />
          </children>
       </GridPane>
       <GridPane prefHeight="83.0" prefWidth="323.0">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="207.33333333333334" minWidth="10.0" prefWidth="79.00002797444662" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="323.6666386922201" minWidth="10.0" prefWidth="323.6666386922201" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="207.33333333333334" minWidth="10.0" prefWidth="200.00001271565753" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="323.6666386922201" minWidth="10.0" prefWidth="203.33332061767578" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="bntaggser" mnemonicParsing="false" onAction="#agregarServicio" text="Agregar servicio" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Label text="Servicio" />
             <ComboBox fx:id="cmbServicio" prefHeight="25.0" prefWidth="169.0" promptText="Seleccione un servicio" GridPane.columnIndex="1" />
             <Label text="Cantidad" GridPane.rowIndex="1" />
-            <TextField fx:id="txtCantidad" prefHeight="25.0" prefWidth="151.0" promptText="1,2,3....." GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="txtCantidad" prefHeight="20.0" prefWidth="262.0" promptText="1,2,3....." GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
       <HBox alignment="CENTER" prefHeight="8.0" prefWidth="200.0">
