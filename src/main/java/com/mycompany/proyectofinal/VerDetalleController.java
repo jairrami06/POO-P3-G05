@@ -8,6 +8,7 @@ import Utilidad.Orden;
 import Utilidad.Servicio;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -25,6 +26,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class VerDetalleController implements Initializable {
 
     Orden o = TertiaryController.ordenDetalle;
+    
+    
     @FXML
     private Label txtOrden;
     @FXML
@@ -44,15 +47,20 @@ public class VerDetalleController implements Initializable {
     @FXML
     private TableColumn<Servicio, String> clmPrecio;
     @FXML
-    private TableColumn<Servicio, Integer> clmCantidad;
+    private TableView<Integer> tblCantidad;
     @FXML
-    private TableColumn<Servicio, Double> clmSubtotal;
-
+    private TableColumn<Integer, Integer> clmCantidad;
+    @FXML
+    private TableView<Double> tblSubtotal;
+    @FXML
+    private TableColumn<Double, Double> clmSubtotal;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        ArrayList<Double> subtotales = new ArrayList();
+        
         txtOrden.setText(String.valueOf(o.getCodOrden()));
         txtCliente.setText(o.getNombreCliente());
         txtFecha.setText(o.getFecha());
@@ -62,7 +70,18 @@ public class VerDetalleController implements Initializable {
       
         clmServicio.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         clmPrecio.setCellValueFactory(new PropertyValueFactory<>("precio"));
+        
+        
         tblDetalle.getItems().setAll(o.getRegistroServicio());
+        tblCantidad.getItems().setAll(o.getRegistroCantidades());
+        for(int i = 0; i < o.getRegistroServicio().size(); i++){
+            double x = o.getRegistroServicio().get(i).getPrecio() * o.getRegistroCantidades().get(i);
+            subtotales.add(x);
+        }
+        
+        tblSubtotal.getItems().setAll(subtotales);
+        
+        
     }  
 
     @FXML

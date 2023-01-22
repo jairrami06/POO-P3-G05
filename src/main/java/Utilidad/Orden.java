@@ -99,49 +99,12 @@ public class Orden implements Serializable{
     }
 
     
-    public static void serializarOrdenes(){
-        ordenes = new ArrayList<>();
-        ArrayList<Servicio> registroServicios = new ArrayList();
-        ArrayList<Integer> registroCant = new ArrayList();
-        try(BufferedReader br = new BufferedReader(new FileReader("data/Ordenes.txt"))){
-            br.readLine();
-            String linea;
-            while((linea = br.readLine()) != null){
-                registroServicios.clear();
-                registroCant.clear();
-                String[] sep1 = linea.split(";");
-                String[] sep = sep1[0].split(",");
-                String[] serv = sep1[1].split(",");
-                String[] cant = sep1[2].split(",");
-                for(int i=0;i<serv.length;i++){
-                    registroServicios.add(Servicio.cargarServicios().get(i));
-                    registroCant.add(Integer.valueOf(cant[i]));
-                }     
-                Orden p = new Orden(Integer.valueOf(sep[0]),sep[1],sep[2],sep[3],Double.valueOf(sep[6]),sep[4],sep[5],registroServicios,registroCant);
-                ordenes.add(p);
-            }
-        }catch(FileNotFoundException e1){
-            System.out.println(e1);
-        }catch(IOException e2){
-            System.out.println(e2);
-        }catch(Exception e3){
-            System.out.println(e3);
-        }
-        try(ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("data/ordenes.ser"))){
-            out.writeObject(ordenes);
-            out.flush();
-        } catch (IOException ex) {
-            System.out.println("IOException:" + ex.getMessage());
-        }
-    }
-    
-    
-    public static ArrayList<Orden> cargarOrdenes() {
-        ArrayList<Orden> ordeness = new ArrayList<>();
-
+    public static ArrayList<Orden> cargarOrdenes(String ruta) {
+        ArrayList<Orden> ordenes = new ArrayList<>();
+        
        //leer la lista de personas del archivo serializado
-        try (ObjectInputStream oi = new ObjectInputStream(new FileInputStream("data/ordenes.ser"))) {
-            ordeness = (ArrayList<Orden>) oi.readObject();
+        try (ObjectInputStream oi = new ObjectInputStream(new FileInputStream(ruta))) {
+            ordenes = (ArrayList<Orden>) oi.readObject();
             System.out.println("=============");
             // System.out.println(empleados);
         } catch (FileNotFoundException ex) {
@@ -151,11 +114,21 @@ public class Orden implements Serializable{
         } catch (ClassNotFoundException  ex) {
             System.out.println("error class:"+ex.getMessage());
         } 
-        return ordeness;
+        return ordenes;
     }
     
-    
-    
-    
+    public static void guardarOrdenesS(Orden o){
+        try(ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("data/Ordenes.ser"))){
+            ordenes.add(o);
+            out.writeObject(ordenes);
+        }catch(FileNotFoundException e1){
+            System.out.println(e1);
+        }catch(IOException e2){
+            System.out.println(e2);
+        }catch(Exception e3){
+            System.out.println(e3);
+        }
+    }
+       
     
 }

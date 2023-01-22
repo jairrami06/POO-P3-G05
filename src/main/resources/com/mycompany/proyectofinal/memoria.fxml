@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -13,8 +14,18 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="757.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="700.0" prefWidth="757.0" style="-fx-background-color: #386745;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
+      <Label fx:id="lbAciertos" layoutX="696.0" layoutY="52.0" prefHeight="38.0" prefWidth="40.0" text="0" textFill="WHITE" visible="false">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Label fx:id="temporizador" layoutX="72.0" layoutY="52.0" text="2:00" textFill="WHITE" visible="false">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
       <AnchorPane fx:id="panel1" layoutX="9.0" layoutY="99.0" prefHeight="587.0" prefWidth="740.0" visible="false">
          <children>
             <Rectangle fx:id="aceite_1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="180.0" layoutX="207.0" layoutY="202.0" onMouseClicked="#changeSource" stroke="BLACK" strokeType="INSIDE" width="150.0" />
@@ -31,18 +42,9 @@
             <Rectangle fx:id="acondicionador_2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="180.0" layoutX="24.0" layoutY="202.0" onMouseClicked="#changeSource" stroke="BLACK" strokeType="INSIDE" width="150.0" />
          </children>
       </AnchorPane>
-      <Label fx:id="temporizador" layoutX="72.0" layoutY="52.0" text="2:00" visible="false">
-         <font>
-            <Font size="26.0" />
-         </font>
-      </Label>
-      <VBox fx:id="vbRegistro" alignment="CENTER" layoutX="72.0" layoutY="71.0" prefHeight="347.0" prefWidth="443.0" spacing="20.0">
+      <VBox fx:id="vbRegistro" alignment="CENTER" layoutX="157.0" layoutY="177.0" prefHeight="347.0" prefWidth="443.0" spacing="20.0">
          <children>
-            <Label id="titulo" fx:id="lblTitulo" text="Juego de memoria">
-               <font>
-                  <Font size="26.0" />
-               </font>
-            </Label>
+            <ImageView fx:id="imgLogoMemoria" fitHeight="150.0" fitWidth="376.0" pickOnBounds="true" preserveRatio="true" />
             <GridPane>
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -53,27 +55,31 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Label text="Cédula:" />
-                  <Label text="Nombre:" GridPane.rowIndex="1" />
-                  <TextField fx:id="txtCedula" GridPane.columnIndex="1" />
-                  <TextField fx:id="txtNombre" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label text="Cédula:" textFill="WHITE" GridPane.halignment="CENTER">
+                     <font>
+                        <Font size="15.0" />
+                     </font></Label>
+                  <Label text="Nombre:" textFill="WHITE" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="15.0" />
+                     </font></Label>
+                  <TextField fx:id="txtCedula" maxWidth="-Infinity" GridPane.columnIndex="1" />
+                  <TextField fx:id="txtNombre" maxWidth="-Infinity" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                </children>
             </GridPane>
-            <HBox alignment="CENTER" prefHeight="8.0" prefWidth="200.0">
+            <HBox alignment="CENTER" prefHeight="8.0" prefWidth="200.0" spacing="20.0">
                <children>
                   <Button fx:id="btnIniciar" onAction="#iniciar" text="Iniciar" />
                   <Button mnemonicParsing="false" onAction="#switchToPrimary" text="Volver" />
                </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
             </HBox>
          </children>
          <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </padding>
       </VBox>
-      <Label fx:id="lbAciertos" layoutX="696.0" layoutY="52.0" prefHeight="38.0" prefWidth="40.0" text="0" visible="false">
-         <font>
-            <Font size="26.0" />
-         </font>
-      </Label>
    </children>
 </AnchorPane>

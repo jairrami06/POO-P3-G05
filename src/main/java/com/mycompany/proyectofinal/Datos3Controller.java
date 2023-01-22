@@ -55,9 +55,15 @@ public class Datos3Controller implements Initializable {
     
     @FXML
     private void guardarServicio(ActionEvent event) {
-        ArrayList<Servicio> servicios = Servicio.cargarServicios();
+        ArrayList<Servicio> servicios = Servicio.cargarServicios("data/Servicios.ser");
+        Servicio s;
         
-        Servicio s = new Servicio(Integer.valueOf(txtCodigo.getText()),txtNombre.getText(),Double.valueOf(txtPrecio.getText()));
+        if(!"".equals(txtCodigo.getText())){
+            s = new Servicio(Integer.valueOf(txtCodigo.getText()),txtNombre.getText(), Double.valueOf(txtPrecio.getText()));
+        }else{
+            s = new Servicio(txtNombre.getText(), Double.valueOf(txtPrecio.getText()));
+        }
+        
         
         if (servicios.contains(s)){
             int ind = servicios.indexOf(s);

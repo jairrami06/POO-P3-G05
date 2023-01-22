@@ -6,10 +6,12 @@ import Enums.TipoVehiculo;
 import Utilidad.Vehiculo;
 import Utilidad.Orden;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -98,31 +100,6 @@ public class Cliente extends Miembro implements Serializable{
         return v;
     }
     
-    public static void serializarClientes(){
-        clientes = new ArrayList<>();
-        try(BufferedReader br = new BufferedReader(new FileReader("data/Clientes.txt"))){
-            br.readLine();
-            String linea;
-            while((linea = br.readLine()) != null){
-                String[] sep = linea.split(",");
-                Cliente c = new Cliente(sep[0],sep[1],sep[2],sep[3],TipoCliente.valueOf(sep[4]));
-                clientes.add(c);
-            }
-        }catch(FileNotFoundException e1){
-            System.out.println(e1);
-        }catch(IOException e2){
-            System.out.println(e2);
-        }catch(Exception e3){
-            System.out.println(e3);
-        }
-        try(ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("data/Clientes.ser"))){
-            out.writeObject(clientes);
-            out.flush();
-        } catch (IOException ex) {
-            System.out.println("IOException:" + ex.getMessage());
-        }
-    }
-    
     public static ArrayList<Cliente> cargarClientes(String ruta) {
         ArrayList<Cliente> clientes = new ArrayList<>();
         
@@ -139,6 +116,19 @@ public class Cliente extends Miembro implements Serializable{
             System.out.println("error class:"+ex.getMessage());
         } 
         return clientes;
+    }
+    
+    public static void guardarClientesS(Cliente c){
+        try(ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("data/Clientes.ser"))){
+            clientes.add(c);
+            out.writeObject(clientes);
+        }catch(FileNotFoundException e1){
+            System.out.println(e1);
+        }catch(IOException e2){
+            System.out.println(e2);
+        }catch(Exception e3){
+            System.out.println(e3);
+        }
     }
     
     

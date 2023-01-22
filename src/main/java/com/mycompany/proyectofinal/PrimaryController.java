@@ -1,24 +1,33 @@
 package com.mycompany.proyectofinal;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import modelo.Cliente;
 import usuario.*;
 
-public class PrimaryController {
+public class PrimaryController implements Initializable{
     
     protected static Usuario user;
     
@@ -31,10 +40,21 @@ public class PrimaryController {
     @FXML
     private Button btnIniciarSesion;
     
+    @FXML
+    private Button btnMemoria;
 
+    
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        
+    }
+    
+    
     
     private void switchToSecondary() throws IOException {
         App.setRoot("secondary");
+        
     }
     
     @FXML
@@ -77,4 +97,6 @@ public class PrimaryController {
         alert.setContentText(mensaje);
         alert.showAndWait();
     }
+    
+    
 }

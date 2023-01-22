@@ -1,7 +1,9 @@
 package com.mycompany.proyectofinal;
 
+import modelo.ClienteJuego;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -32,7 +34,7 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import modelo.Cliente;
 import java.util.Date;
-import modelo.ClienteJuego;
+import javafx.scene.image.ImageView;
 
 /**
  * FXML Controller class
@@ -41,7 +43,7 @@ import modelo.ClienteJuego;
  */
 public class MemoriaController implements Initializable {
 
-    public static ClienteJuego clientejuego;
+    //public static ClienteJuego clientejuego;
     @FXML
     public Pane panel1;
     @FXML
@@ -56,6 +58,8 @@ public class MemoriaController implements Initializable {
     private TextField txtNombre;
     @FXML
     private Button btnIniciar;
+    @FXML
+    private ImageView imgLogoMemoria;
 
     public String firstVal = "";
     public Rectangle firstRectangle;
@@ -70,7 +74,14 @@ public class MemoriaController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        try{
+            FileInputStream is = new FileInputStream("data/memoria/JuegoMemoriaLogo.png");
+            Image img = new Image(is);
+            imgLogoMemoria.setImage(img);
+            
+        }catch(FileNotFoundException e){
+            System.out.println(e.getMessage());
+        }
     }
 
     @FXML
@@ -168,7 +179,7 @@ public class MemoriaController implements Initializable {
 
                     rec.setFill(new ImagePattern(img));
 
-                    CompletableFuture.delayedExecutor(600, TimeUnit.MILLISECONDS).execute(() -> {
+                    CompletableFuture.delayedExecutor(700, TimeUnit.MILLISECONDS).execute(() -> {
                         rec.setFill(new ImagePattern(image));
                         firstRectangle.setFill(new ImagePattern(image));
                         firstVal = "";
@@ -277,8 +288,8 @@ public class MemoriaController implements Initializable {
                             Platform.runLater(() -> {
                                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
 
-                                alert.setTitle("Resultado de operacion");
-                                alert.setHeaderText("Notificación");
+                                alert.setTitle("Notificación");
+                                alert.setHeaderText("Juego Terminado");
                                 alert.setContentText("¡Encontraste todos los pares!\n¡Bien hecho!");
                                 Optional<ButtonType> result = alert.showAndWait();
                                 if(result.get() == ButtonType.OK){
@@ -297,9 +308,9 @@ public class MemoriaController implements Initializable {
                             Platform.runLater(() -> {
                                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
 
-                                alert.setTitle("Resultado de operacion");
-                                alert.setHeaderText("Notificación");
-                                alert.setContentText("¡Se acabó el tiempo!\n¡Juego terminado");
+                                alert.setTitle("Notificación");
+                                alert.setHeaderText("Juego Terminado");
+                                alert.setContentText("¡Se acabó el tiempo!");
                                 Optional<ButtonType> result = alert.showAndWait();
                                 if(result.get() == ButtonType.OK){
                                     try{
@@ -426,7 +437,11 @@ public class MemoriaController implements Initializable {
     
     public void guardarResultados(){
         String tiempo = String.valueOf(2-min)+":"+String.valueOf(60-seg);
-        Date date = Date.from(Instant.now());
-        clientejuego = new ClienteJuego(nombre,date,tiempo,aciertos,fallos);
+        String date = Date.from(Instant.now()).toString();
+        ClienteJuego cJ = new ClienteJuego(nombre,date,tiempo,aciertos,fallos);
+        
+        ClienteJuego.guardarClientesJuegoS(cJ);
+        
+        
     }
 }

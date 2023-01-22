@@ -1,5 +1,6 @@
 package com.mycompany.proyectofinal;
 
+import modelo.ClienteJuego;
 import Enums.TipoCliente;
 import Utilidad.Orden;
 import Utilidad.Servicio;
@@ -41,11 +42,8 @@ public class SecondaryController {
     private Button btnVisJuego;
     
     public void initialize() {
-        Orden.serializarOrdenes();
         modificacionMenu(user);
-        Cliente.serializarClientes();
-        Proveedor.serializarProveedores();
-        Servicio.serializarServicios();
+        
     }
     
 
@@ -56,18 +54,18 @@ public class SecondaryController {
     
     public void modificacionMenu(Usuario user){
         if(user instanceof Admin){
-            lblPrincipal.setText("Bienvenido al menu de Admin");
+            lblPrincipal.setText("Bienvenido "+user.getNombre());
             btn1.setVisible(true);
             btn2.setVisible(true);
             btn3.setVisible(true);
             btnVisJuego.setVisible(true);
         }else if (user instanceof Cobranza){
-            lblPrincipal.setText("Bienvenido al menu de Cobranza");
+            lblPrincipal.setText("Bienvenido "+user.getNombre());
             btn4.setVisible(true);
             btn5.setVisible(true);
             btn6.setVisible(true);
         }else if (user instanceof Tecnico){         
-            lblPrincipal.setText("Bienvenido al menu de Técnico");
+            lblPrincipal.setText("Bienvenido "+user.getNombre());
             btn7.setVisible(true);
             btn8.setVisible(true);
             btn9.setVisible(true);
@@ -126,7 +124,7 @@ public class SecondaryController {
     
     @FXML
     private void juego(ActionEvent event) throws IOException {
-        o = MemoriaController.clientejuego;
+        o = new ClienteJuego();
         App.setRoot("tertiary");
     }
 }

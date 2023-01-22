@@ -56,7 +56,7 @@ public class Datos4Controller implements Initializable {
     private ComboBox<Servicio> cmbServicio;
     @FXML
     private TextField txtCantidad;
-    ArrayList<Servicio> servicios = Servicio.cargarServicios();
+    ArrayList<Servicio> servicios = Servicio.cargarServicios("data/Servicios.ser");
     ArrayList<Cliente> clientes = Cliente.cargarClientes("data/Clientes.ser");
     ArrayList<Servicio> serviciosorden;
     ArrayList<Integer> cantidades;
@@ -94,7 +94,7 @@ public class Datos4Controller implements Initializable {
 
     @FXML
     private void guardarOrden(ActionEvent event) {
-        ArrayList<Orden> ordenes = Orden.cargarOrdenes();
+        ArrayList<Orden> ordenes = Orden.cargarOrdenes("data/Ordenes.ser");
         int cod = ordenes.size();
         Cliente c = (Cliente) cmbCliente.getValue();
         int ind = clientes.indexOf(c);

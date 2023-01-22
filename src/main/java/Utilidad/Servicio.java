@@ -61,6 +61,13 @@ public class Servicio implements Serializable{
         }
         return false;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + this.codigo;
+        return hash;
+    }
     //getters y setters
     public int getCodigo() {
         return codigo;
@@ -84,37 +91,12 @@ public class Servicio implements Serializable{
         this.precio = precio;
     }
     
-    public static void serializarServicios(){
-        servicios = new ArrayList<>();
-        try(BufferedReader br = new BufferedReader(new FileReader("data/Servicios.txt"))){
-            br.readLine();
-            String linea;
-            while((linea = br.readLine()) != null){
-                String[] sep = linea.split(",");
-                Servicio s = new Servicio(sep[0],Double.valueOf(sep[1]));
-                servicios.add(s);
-            }
-        }catch(FileNotFoundException e1){
-            System.out.println(e1);
-        }catch(IOException e2){
-            System.out.println(e2);
-        }catch(Exception e3){
-            System.out.println(e3);
-        }
-        try(ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("data/Servicios.ser"))){
-            out.writeObject(servicios);
-            out.flush();
-        } catch (IOException ex) {
-            System.out.println("IOException:" + ex.getMessage());
-        }
-    }
-    
-    public static ArrayList<Servicio> cargarServicios() {
-        ArrayList<Servicio> lServicios = new ArrayList<>();
+    public static ArrayList<Servicio> cargarServicios(String ruta) {
+        ArrayList<Servicio> serviciosN = new ArrayList<>();
         
        //leer la lista de personas del archivo serializado
-        try (ObjectInputStream oi = new ObjectInputStream(new FileInputStream("data/Servicios.ser"))) {
-            lServicios = (ArrayList<Servicio>) oi.readObject();
+        try (ObjectInputStream oi = new ObjectInputStream(new FileInputStream(ruta))) {
+            serviciosN = (ArrayList<Servicio>) oi.readObject();
             System.out.println("=============");
             // System.out.println(empleados);
         } catch (FileNotFoundException ex) {
@@ -124,8 +106,22 @@ public class Servicio implements Serializable{
         } catch (ClassNotFoundException  ex) {
             System.out.println("error class:"+ex.getMessage());
         } 
-        return lServicios;
+        return serviciosN;
     }
+    
+    public static void guardarServiciosS(Servicio s){
+        try(ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("data/Servicios.ser"))){
+            servicios.add(s);
+            out.writeObject(servicios);
+        }catch(FileNotFoundException e1){
+            System.out.println(e1);
+        }catch(IOException e2){
+            System.out.println(e2);
+        }catch(Exception e3){
+            System.out.println(e3);
+        }
+    }
+    
     
     
     

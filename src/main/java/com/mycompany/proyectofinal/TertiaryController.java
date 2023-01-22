@@ -4,6 +4,7 @@
  */
 package com.mycompany.proyectofinal;
 
+import modelo.ClienteJuego;
 import Enums.TipoCliente;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -41,6 +42,7 @@ import usuario.*;
  */
 
 public class TertiaryController implements Initializable {
+    
     private Usuario user = PrimaryController.user;
     private Object o = SecondaryController.o;
     public static Orden ordenDetalle;
@@ -66,6 +68,8 @@ public class TertiaryController implements Initializable {
     private Label lblTitulo;
     @FXML
     private Button btnAtras;
+    @FXML
+    private HBox hbxPrincipal;
     @FXML
     private Button btnAgregar;
     @FXML
@@ -194,30 +198,30 @@ public class TertiaryController implements Initializable {
                 servicios = new ArrayList();
                 tblServicios.setVisible(true);
 
-////                columnCodigoS.setCellValueFactory(new PropertyValueFactory<>("codigo"));
+                columnCodigoS.setCellValueFactory(new PropertyValueFactory<>("codigo"));
                 columnNombreS.setCellValueFactory(new PropertyValueFactory<>("nombre"));
                 columnPrecioS.setCellValueFactory(new PropertyValueFactory<>("precio"));
 
 
-                servicios.addAll(Servicio.cargarServicios());
+                servicios.addAll(Servicio.cargarServicios("data/Servicios.ser"));
                 tblServicios.getItems().setAll(servicios);
+                
             }else if(o instanceof ClienteJuego){
-                tblClientesJuego.setVisible(true);
+                lblTitulo.setText("Resultados del juego de memoria");
                 btnEditar.setVisible(false);
                 btnAgregar.setVisible(false);
                 btnEliminar.setVisible(false);
-                clientesjuego = new ArrayList();
-                ClienteJuego cj = (ClienteJuego) o;
-                lblTitulo.setText("Clientes del juego");
+            
                 clientesjuego = new ArrayList();
                 tblClientesJuego.setVisible(true);
-                clientesjuego.add(cj);
 
                 columnNombreCJ.setCellValueFactory(new PropertyValueFactory<>("nombre"));
                 columnFechaCJ.setCellValueFactory(new PropertyValueFactory<>("fecha"));
                 columnAciertosCJ.setCellValueFactory(new PropertyValueFactory<>("aciertos"));
                 columnFallosCJ.setCellValueFactory(new PropertyValueFactory<>("fallos"));
                 columnTiempoCJ.setCellValueFactory(new PropertyValueFactory<>("tiempojuego"));
+            
+                clientesjuego.addAll(ClienteJuego.cargarClientesJuego("data/ClientesJuego.ser"));
                 tblClientesJuego.getItems().setAll(clientesjuego);
             }
         }else if(u instanceof Tecnico){
@@ -241,7 +245,7 @@ public class TertiaryController implements Initializable {
                 columnNomCliente.setCellValueFactory(new PropertyValueFactory<>("nombreCliente"));
                 columnTotalPagar.setCellValueFactory(new PropertyValueFactory<>("total"));
                 ordenes = new ArrayList();
-                ordenes.addAll(Orden.cargarOrdenes());
+                ordenes.addAll(Orden.cargarOrdenes("data/Ordenes.ser"));
                 tblOrdenes.getItems().setAll(ordenes);
             }else if (o instanceof Cliente){
                 btnEditar.setVisible(false);
