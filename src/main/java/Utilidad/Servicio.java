@@ -19,8 +19,10 @@ public class Servicio implements Serializable{
     private int codigo;
     private String nombre;
     private double precio;
+    private boolean borrado;
     private static ArrayList<Integer> codigosServicios = new ArrayList();
     private static ArrayList<Servicio> servicios;
+    private static final long serialVersionUID = 7511681662292568743L;
     
     //cosntructor por default util para las validaciones
     public Servicio() {
@@ -31,20 +33,17 @@ public class Servicio implements Serializable{
     public Servicio(String nombre, double precio) {
         this.nombre = nombre;
         this.precio = precio;
-        this.codigo = generarCodigo();
+        this.borrado = false;
     }
     
     public Servicio(int codigo,String nombre, double precio){
         this(nombre, precio);
         this.codigo = codigo;
+        this.borrado = false;
+        
     }
     
-    //metodo para generar un codigo de servicio cuando se agregue un nuevo servicio
-    public int generarCodigo(){
-        int codigo = codigosServicios.size() + 1;
-        codigosServicios.add(codigo);
-        return codigo;
-    }
+    
     //metodo tostring para el formato
     public String toString(){
         return nombre+"";
@@ -90,6 +89,16 @@ public class Servicio implements Serializable{
     public void setPrecio(double precio) {
         this.precio = precio;
     }
+
+    public boolean getBorrado() {
+        return borrado;
+    }
+
+    public void setBorrado(boolean borrado) {
+        this.borrado = borrado;
+    }
+    
+    
     
     public static ArrayList<Servicio> cargarServicios(String ruta) {
         ArrayList<Servicio> serviciosN = new ArrayList<>();

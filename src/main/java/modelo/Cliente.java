@@ -34,6 +34,7 @@ public class Cliente extends Miembro implements Serializable{
     }
     
     public Cliente(){}
+    
     public Cliente(String codigo){
         this.codigo = codigo;
     }

@@ -27,6 +27,7 @@ public class Orden implements Serializable{
     private  int codigoServicio;
     private  int cantidad;
     private String nombreServicio;
+    private double precioServ;
     private static ArrayList<Orden> ordenes;
     
     public Orden(){
@@ -41,7 +42,7 @@ public class Orden implements Serializable{
     
    
     //mconstructor de la clase orden
-    public Orden(int codOrden, String codigoCliente, String fecha,String nombreCliente ,double total, String tipovehiculo,String placa, int codigoServicio, int cantidad, String nombreServicio,String tecnico) {
+    public Orden(int codOrden, String codigoCliente, String fecha,String nombreCliente ,double total, String tipovehiculo,String placa, int codigoServicio, int cantidad, String nombreServicio,String tecnico, double precioServ) {
         this.codOrden = codOrden;
         this.codigoCliente = codigoCliente;
         this.nombreCliente = nombreCliente;
@@ -53,6 +54,7 @@ public class Orden implements Serializable{
         this.cantidad = cantidad;
         this.nombreServicio = nombreServicio;
         this.tecnico = tecnico;
+        this.precioServ = precioServ;
         
     }
     
@@ -104,6 +106,12 @@ public class Orden implements Serializable{
     public String getTipovehiculo() {
         return tipovehiculo;
     }
+
+    public double getPrecioServ() {
+        return precioServ;
+    }
+    
+    
 
     public static ArrayList<Orden> getOrdenes() {
         return ordenes;

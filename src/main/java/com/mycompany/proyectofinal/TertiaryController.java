@@ -76,7 +76,7 @@ public class TertiaryController implements Initializable {
     @FXML
     private Button btnEliminar;
     
-    private ArrayList<Cliente> clientes;
+    private ArrayList<Cliente> clientes = Cliente.cargarClientes("data/Clientes.ser");
     @FXML
     private TableView<Cliente> tblClientes;
     @FXML
@@ -189,8 +189,13 @@ public class TertiaryController implements Initializable {
                 columnDireccionC.setCellValueFactory(new PropertyValueFactory<>("direccion"));
                 columnTelefonoC.setCellValueFactory(new PropertyValueFactory<>("telefono"));
                 columnTipoC.setCellValueFactory(new PropertyValueFactory<>("tipo"));
-
-                clientes.addAll(Cliente.cargarClientes("data/Clientes.ser"));
+                
+                for(Cliente c: Cliente.cargarClientes("data/Clientes.ser")){
+                    if(c.getBorrado() != true){
+                        clientes.add(c);
+                    }
+                }
+                
                 tblClientes.getItems().setAll(clientes);
 
             }else if(o instanceof Proveedor){
@@ -203,7 +208,12 @@ public class TertiaryController implements Initializable {
                 columnDireccionP.setCellValueFactory(new PropertyValueFactory<>("direccion"));
                 columnTelefonoP.setCellValueFactory(new PropertyValueFactory<>("telefono"));
 
-                proveedores.addAll(Proveedor.cargarProveedores("data/Proveedores.ser"));
+                for(Proveedor p: Proveedor.cargarProveedores("data/Proveedores.ser")){
+                    if(p.getBorrado() != true){
+                        proveedores.add(p);
+                    }
+                }
+                
                 tblProveedores.getItems().setAll(proveedores);
 
             }else if(o instanceof Servicio){
@@ -216,7 +226,12 @@ public class TertiaryController implements Initializable {
                 columnPrecioS.setCellValueFactory(new PropertyValueFactory<>("precio"));
 
 
-                servicios.addAll(Servicio.cargarServicios("data/Servicios.ser"));
+                for(Servicio s: Servicio.cargarServicios("data/Servicios.ser")){
+                    if(s.getBorrado() != true){
+                        servicios.add(s);
+                    }
+                }
+                
                 tblServicios.getItems().setAll(servicios);
                 
             }else if(o instanceof ClienteJuego){
@@ -393,9 +408,9 @@ public class TertiaryController implements Initializable {
             alert.setContentText("¿Estas seguro que deseas eliminar este cliente?");
         
             Optional<ButtonType> result = alert.showAndWait();
-            if(result.get() == ButtonType.OK){
+            if(result.get() == ButtonType.OK){ 
                 int ind = clientes.indexOf(c);
-                clientes.remove(ind);
+                clientes.get(ind).setBorrado(true);
             }
         }else if(o instanceof Proveedor){
             Proveedor p = (Proveedor) tblProveedores.getSelectionModel().getSelectedItem();
@@ -409,7 +424,7 @@ public class TertiaryController implements Initializable {
             if(result.get() == ButtonType.OK){
                 //No borrar de la lista si no, ya no mostrarlo en el table view
                 int ind = proveedores.indexOf(p);
-                proveedores.remove(ind);
+                proveedores.get(ind).setBorrado(true);
             }
         }
         else{
@@ -423,7 +438,7 @@ public class TertiaryController implements Initializable {
             Optional<ButtonType> result = alert.showAndWait();
             if(result.get() == ButtonType.OK){
                 int ind = servicios.indexOf(s);
-                servicios.remove(ind);
+                servicios.get(ind).setBorrado(true);
             }
         }
     

@@ -64,13 +64,9 @@ public class VerDetalleController implements Initializable {
         txtTotal.setText(String.valueOf(o.getTotal()));
         txtTipoVehiculo.setText(o.getTipovehiculo());
         clmServicio.setCellValueFactory(new PropertyValueFactory<>("nombreServicio"));
-        clmPrecio.setCellValueFactory(new PropertyValueFactory<>("precio"));
+        clmPrecio.setCellValueFactory(new PropertyValueFactory<>("precioServ"));
         clmCantidad.setCellValueFactory(new PropertyValueFactory<>("cantidad"));
-       
-        
-            
-        
-        
+        tblDetalle.getItems().setAll(o);
         
     }  
 

@@ -57,14 +57,16 @@ public class Datos3Controller implements Initializable {
     private void guardarServicio(ActionEvent event) {
         ArrayList<Servicio> servicios = Servicio.cargarServicios("data/Servicios.ser");
         Servicio s;
-        
-        if(!"".equals(txtCodigo.getText())){
+        if(txtCodigo.getText().equals("")){
+            int codigoX = servicios.size() + 1;
+            s = new Servicio(codigoX,txtNombre.getText(), Double.valueOf(txtPrecio.getText()));
+        }
+        else{
             s = new Servicio(Integer.valueOf(txtCodigo.getText()),txtNombre.getText(), Double.valueOf(txtPrecio.getText()));
-        }else{
-            s = new Servicio(txtNombre.getText(), Double.valueOf(txtPrecio.getText()));
         }
         
         
+         
         if (servicios.contains(s)){
             int ind = servicios.indexOf(s);
             servicios.set(ind, s);

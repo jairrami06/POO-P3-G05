@@ -9,8 +9,10 @@ public abstract class Miembro implements Serializable{
     protected String nombre;
     protected String direccion;
     protected String telefono;
+    protected boolean borrado;
     protected static ArrayList<Cliente> clientes;
     protected static ArrayList<Proveedor> proveedores;
+    private static final long serialVersionUID = 7511681662295568744L;
     
     //constructores necesarios para guardar los datos asi como validar el miembro
     public Miembro(String codigo, String nombre, String direccion, String telefono) {
@@ -18,6 +20,7 @@ public abstract class Miembro implements Serializable{
         this.nombre = nombre;
         this.direccion = direccion;
         this.telefono = telefono;
+        this.borrado = false;
     }
     
     public Miembro(){
@@ -71,6 +74,17 @@ public abstract class Miembro implements Serializable{
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
+
+    public boolean getBorrado() {
+        return borrado;
+    }
+
+    public void setBorrado(boolean borrado) {
+        this.borrado = borrado;
+    }
+    
+    
+    
     
     
 }

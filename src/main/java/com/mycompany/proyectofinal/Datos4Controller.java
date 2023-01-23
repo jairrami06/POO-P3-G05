@@ -99,7 +99,7 @@ public class Datos4Controller implements Initializable {
         String tipov = String.valueOf(cmbVehiculo.getValue());
      
         total += s.getPrecio()*cant;
-        Orden nuevao = new Orden(cod,cli.getCodigo(),fecha,cli.getNombre(),total,tipov,tfPlaca.getText(),s.getCodigo(),cant,s.getNombre(),u.getNombre());
+        Orden nuevao = new Orden(cod,cli.getCodigo(),fecha,cli.getNombre(),total,tipov,tfPlaca.getText(),s.getCodigo(),cant,s.getNombre(),u.getNombre(),s.getPrecio());
         ordenes.add(nuevao);  
         Tecnico t = (Tecnico) u;
         t.getOrdenesTecnico().add(nuevao);
